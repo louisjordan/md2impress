@@ -1,3 +1,5 @@
-const mdtoimpress = function() {};
+function mdtoimpress(markdown) {
+  return markdown;
+}
 
-export default mdtoimpress();
+module.exports = mdtoimpress;
