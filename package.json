@@ -1,0 +1,20 @@
+{
+  "name": "mdtoimpress",
+  "version": "0.0.0",
+  "description": "a markdown to Impress.js presentation generator",
+  "main": "src/index.js",
+  "repository": "git@github.com:louisjordan/mdtoimpress.git",
+  "author": "Louis Jordan <louisjordan@hotmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "jest": "@21.2.1",
+    "webpack": "@3.6.0"
+  }
+}
