@@ -35,11 +35,11 @@ const html = mdtoimpress(markdown);
 ```html
 <!doctype html>
 <html>
-	<body>
-	
-	<script src="path/to/mdtoimpress.min.js"></script>
-	<script>
-		const markdown = `
+  <body>
+
+    <script src="path/to/mdtoimpress.min.js"></script>
+    <script>
+      const markdown = `
 # Example Slide
 Welcome to my *example* slide
 ------
@@ -47,8 +47,8 @@ Welcome to my *example* slide
 This is the second slide
 `;
 
-		const html = window.mdtoimpress(markdown);
-	</script>
-	</body>
+      const html = window.mdtoimpress(markdown);
+    </script>
+  </body>
 </html>
 ```
