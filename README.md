@@ -4,8 +4,8 @@
 ## Installation
 
 ```bash
-$ npm install mdtoimpress 								# via npm
-$ yarn add mdtoimpress									# yarn works too!
+$ npm install mdtoimpress 				# via npm
+$ yarn add mdtoimpress					# yarn works too!
 $ git clone git@github.com:louisjordan/mdtoimpress.git 	# via github
 ```
 
