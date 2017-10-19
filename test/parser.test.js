@@ -15,7 +15,7 @@ beforeAll(() => {
 
 describe('parser', () => {
   test('should return an array', () => {
-    expect(typeof simpleTest).toBe('array');
+    expect(Array.isArray(simpleTest)).toBe(true);
   });
 
   test('should return the correct size array', () => {

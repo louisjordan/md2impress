@@ -4,7 +4,7 @@ const steps = [{ attributes: { x: 0, y: 0 } }];
 
 describe('layout engine', () => {
   test('should return an array of steps', () => {
-    expect(typeof layoutEngine(steps)).toBe('array');
+    expect(Array.isArray(layoutEngine.map(steps))).toBe(true);
   });
 });
 
