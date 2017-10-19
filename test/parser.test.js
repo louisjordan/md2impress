@@ -1,12 +1,14 @@
 const parser = require('../src/parser.js');
 
+let simpleTest, complexTest;
+
 beforeAll(() => {
-  const simpleTest = parser.parse(`# Test 1`);
-  const complexTest = parser.parse(
-    `<!-- x=10 y=100 --> 
+  simpleTest = parser.parse(`# Test 1`);
+  complexTest = parser.parse(
+    `<!-- x=100 y=10 --> 
     # H1 
     ------ 
-    <!-- x=100 y=10 --> 
+    <!-- x=200 y=20 --> 
     ## H2`
   );
 });
@@ -37,15 +39,18 @@ describe('step array item', () => {
 });
 
 describe('step attributes object', () => {
-  test('should be an object', () => {
-    expect(typeof simpleTest[0]).toBe('object');
+  test('should contain the correct attributes', () => {
+    expect(complexTest[0].attributes.x).toBe('100');
+    expect(complexTest[0].attributes.y).toBe('10');
+    expect(complexTest[1].attributes.x).toBe('200');
+    expect(complexTest[1].attributes.y).toBe('20');
   });
+});
 
-  test('should contain an attributes object', () => {
-    expect(typeof simpleTest[0].attributes).toBe('object');
-  });
-
-  test('should contain a content string', () => {
-    expect(typeof simpleTest[0].content).toBe('string');
+describe('step content string', () => {
+  test('should contain correct html', () => {
+    expect(simpleTest[0].content).toBe('<h1>Test 1</h1>');
+    expect(complexTest[0].content).toBe('<h1>H1</h1>');
+    expect(complexTest[1].content).toBe('<h2>H2</h2>');
   });
 });
