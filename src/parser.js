@@ -11,7 +11,7 @@ const parser = {
    *   content: '<h1>Slide title</h1>'
    * };
    * 
-   * @param {string} markdown 
+   * @param {string} markdown
    */
   parse: markdown => {}
 };
