@@ -3,8 +3,8 @@ const transformer = {
    * transformer.map
    * accepts an array of steps and a layout
    * returns an array of transformed steps
-   * 
-   * @param {array} input 
+   *
+   * @param {array} input
    * @param {string} layout
    */
   apply: (input, layoutName = 'manual') => {
