@@ -1,4 +1,4 @@
-# md2impress [![Build Status](https://api.travis-ci.com/louisjordan/mdtoimpress.svg?token=tF3yA5qbRRzsfTPZf6ue&branch=master "Build Status")](https://travis-ci.com/louisjordan/md2impress)
+# md2impress [![Build Status](https://travis-ci.com/louisjordan/md2impress.svg?token=tF3yA5qbRRzsfTPZf6ue&branch=master)](https://travis-ci.com/louisjordan/md2impress)
 :pencil: a Markdown to Impress.js presentation generator
 
 ## Installation
