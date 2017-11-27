@@ -1,9 +1,9 @@
 {
-  "name": "mdtoimpress",
+  "name": "md2impress",
   "version": "0.0.0",
-  "description": "a markdown to Impress.js presentation generator",
+  "description": "a Markdown to Impress.js presentation generator",
   "main": "src/index.js",
-  "repository": "git@github.com:louisjordan/mdtoimpress.git",
+  "repository": "git@github.com:louisjordan/md2impress.git",
   "author": "Louis Jordan <louisjordan@hotmail.com>",
   "license": "MIT",
   "scripts": {

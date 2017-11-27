@@ -1,22 +1,22 @@
-# mdtoimpress [![Build Status](https://api.travis-ci.com/louisjordan/mdtoimpress.svg?token=tF3yA5qbRRzsfTPZf6ue&branch=master "Build Status")](https://travis-ci.com/louisjordan/mdtoimpress)
-:pencil: a markdown to Impress.js presentation generator
+# md2impress [![Build Status](https://api.travis-ci.com/louisjordan/mdtoimpress.svg?token=tF3yA5qbRRzsfTPZf6ue&branch=master "Build Status")](https://travis-ci.com/louisjordan/md2impress)
+:pencil: a Markdown to Impress.js presentation generator
 
 ## Installation
 
 ```bash
-$ npm install mdtoimpress 				# via npm
-$ yarn add mdtoimpress					# yarn works too!
-$ git clone git@github.com:louisjordan/mdtoimpress.git 	# via github
+$ npm install md2impress 				# via npm
+$ yarn add md2impress					# yarn works too!
+$ git clone git@github.com:louisjordan/md2impress.git 	# via github
 ```
 
 ## Usage
-mdtoimpress uses the Universal Module Definition (UMD) which means it can work in Node as well as the browser.
+md2impress uses the Universal Module Definition (UMD) which means it can work in Node as well as the browser.
 
 
 *Node*
 
 ```javascript
-const mdtoimpress = require('mdtoimpress');
+const md2impress = require('md2impress');
 
 const markdown = `
 # Example Slide
@@ -26,7 +26,7 @@ Welcome to my *example* slide
 This is the second slide
 `;
 
-const html = mdtoimpress(markdown);
+const html = md2impress(markdown);
 ```
 
 
@@ -37,7 +37,7 @@ const html = mdtoimpress(markdown);
 <html>
   <body>
 
-    <script src="path/to/mdtoimpress.min.js"></script>
+    <script src="path/to/md2impress.min.js"></script>
     <script>
       const markdown = `
 # Example Slide
@@ -47,7 +47,7 @@ Welcome to my *example* slide
 This is the second slide
 `;
 
-      const html = window.mdtoimpress(markdown);
+      const html = window.md2impress(markdown);
     </script>
   </body>
 </html>
