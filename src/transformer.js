@@ -7,16 +7,19 @@ const transformer = {
    * @param {array} input
    * @param {string} layout
    */
-  apply: (input, layoutName = 'manual') => {
-    let output = input;
+  apply(steps, layoutName = 'manual') {
+    let output = steps;
 
-    // TODO: Add layout file check
-    if (layoutName != 'manual') {
-      const layout = require(`./layouts/${layoutName}`);
-      output = output.map(layout.map);
+    if (layoutName !== 'manual' && Object.keys(this.whitelist).includes(layoutName)) {
+      const layout = this.whitelist[layoutName];
+      output = steps.map(layout.map);
     }
 
     return output;
+  },
+  whitelist: {
+    horizontal: require('./layouts/horizontal')
+    // vertical: require('./layouts/vertical')
   }
 };
 
