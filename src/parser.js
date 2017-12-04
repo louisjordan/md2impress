@@ -12,7 +12,16 @@ const parser = {
    * @param {string} markdown
    */
   parse(markdown) {
-    /* Extract presentation steps and convert into array of objects */
+    // reducer function to convert array of step content strings into array of objects
+    const stepMarkdownReducer = (stepAccumulator, content) => {
+      stepAccumulator.push({
+        attributes: extractStepAttributes(content),
+        content
+      });
+
+      return stepAccumulator;
+    };
+
     return extractSteps(markdown).reduce(stepMarkdownReducer, []);
   }
 };
@@ -24,23 +33,6 @@ const parser = {
 const extractSteps = markdown => {
   const steps = markdown.split(/-{6}/); // TODO: Improve this splitting regex
   return steps;
-};
-
-/**
- * reducer function to convert array of step content strings into array of objects
- * objects contain:
- *   attributes object
- *   content string
- * @param {*} stepAccumulator
- * @param {*} content
- */
-const stepMarkdownReducer = (stepAccumulator, content) => {
-  stepAccumulator.push({
-    attributes: extractStepAttributes(content),
-    content
-  });
-
-  return stepAccumulator;
 };
 
 /**

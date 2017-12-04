@@ -47,10 +47,10 @@ describe('step attributes object', () => {
   });
 });
 
-describe('step content string', () => {
-  test('should contain correct html', () => {
-    expect(simpleTest[0].content).toBe('<h1>Test 1</h1>');
-    expect(complexTest[0].content).toBe('<h1>H1</h1>');
-    expect(complexTest[1].content).toBe('<h2>H2</h2>');
-  });
-});
+// describe('step content string', () => {
+//   test('should contain correct html', () => {
+//     expect(simpleTest[0].content).toBe('<h1>Test 1</h1>');
+//     expect(complexTest[0].content).toBe('<h1>H1</h1>');
+//     expect(complexTest[1].content).toBe('<h2>H2</h2>');
+//   });
+// });
