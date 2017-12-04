@@ -9,6 +9,7 @@
   "scripts": {
     "build": "webpack",
     "lint": "prettier --single-quote -l --write \"{src,test}/**/*.js\"",
+    "pre-commit": "npm run build && npm run lint",
     "test": "jest"
   },
   "devDependencies": {
@@ -18,5 +19,8 @@
     "jest": "@21.2.1",
     "prettier": "^1.8.2",
     "webpack": "@3.6.0"
+  },
+  "dependencies": {
+    "marked": "^0.3.6"
   }
 }
