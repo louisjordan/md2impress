@@ -7,12 +7,16 @@ const transformer = {
    * @param {array} input
    * @param {string} layout
    */
-  apply(steps, layoutName = 'manual') {
+  transform(steps, layoutName = 'manual') {
     let output = steps;
 
-    if (layoutName !== 'manual' && Object.keys(this.whitelist).includes(layoutName)) {
-      const layout = this.whitelist[layoutName];
-      output = steps.map(layout.map);
+    if (layoutName !== 'manual') {
+      if (Object.keys(transformer.whitelist).includes(layoutName)) {
+        const layout = transformer.whitelist[layoutName];
+        output = steps.map(layout.map);
+      } else {
+        throw Error(`Layout "${layoutName}" not found`);
+      }
     }
 
     return output;

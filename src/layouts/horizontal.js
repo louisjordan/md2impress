@@ -3,7 +3,7 @@ const stepWidth = 900;
 const horizontal = {
   map: (step, index) => {
     step.attributes = {
-      x: stepWidth * index
+      x: String(stepWidth * index)
     };
 
     return step;
