@@ -5,8 +5,8 @@ const config = {
   entry: './src',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'mdtoimpress.min.js',
-    libraryTarget: 'umd'
+    filename: 'md2impress.min.js'
+    // libraryTarget: 'umd'
   },
   module: {
     rules: [
