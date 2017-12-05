@@ -39,10 +39,11 @@ const ouputPath = path.resolve(basePath, program.output);
 const layout = program.layout || 'manual';
 
 // read input file
-fs.readFile(inputPath, (err, input) => {
+fs.readFile(inputPath, 'utf8', (err, input) => {
   if (err) throw err;
 
-  const impressHTML = md2impress(input, layout); // TODO: Handle error here if layout is not supported
+  const html = md2impress(input, layout); // TODO: Handle error here if layout is not supported
+  console.log(html);
 
   fs.writeFile(ouputPath, html, err => {
     if (err) throw err;
