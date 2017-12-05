@@ -12,6 +12,8 @@ const parser = {
    * @param {string} markdown
    */
   parse(markdown) {
+    if (typeof markdown !== 'string') throw Error(`Input must be of type string not ${typeof markdown}`);
+
     // reducer function to convert array of step content strings into array of objects
     const stepMarkdownReducer = (stepAccumulator, content) => {
       stepAccumulator.push({

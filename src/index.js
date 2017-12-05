@@ -3,6 +3,8 @@ const { transform } = require('./transformer');
 const { generate } = require('./generator');
 
 function md2impress(markdown, layout = 'manual') {
+  console.log(markdown);
+
   // TODO: Check layout is supported - transformer.whitelist
   return generate(transform(parse(markdown), layout));
 }
