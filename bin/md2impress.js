@@ -30,3 +30,23 @@ if (!program.input || !program.output) {
   program.help();
   process.exit();
 }
+
+/* Read input path -> generate html with md2impress -> write to output path */
+const basePath = process.cwd();
+const inputPath = path.resolve(basePath, program.input);
+const ouputPath = path.resolve(basePath, program.output);
+
+const layout = program.layout || 'manual';
+
+// read input file
+fs.readFile(inputPath, (err, input) => {
+  if (err) throw err;
+
+  const impressHTML = md2impress(input, layout); // TODO: Handle error here if layout is not supported
+
+  fs.writeFile(ouputPath, html, err => {
+    if (err) throw err;
+    console.log(`Save successful! base path: ${basePath} saved: [MD] ${program.input} [HTML] ${program.output}`);
+    process.exit();
+  });
+});
