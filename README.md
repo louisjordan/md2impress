@@ -1,5 +1,5 @@
 # md2impress [![Build Status](https://travis-ci.com/louisjordan/md2impress.svg?token=tF3yA5qbRRzsfTPZf6ue&branch=master)](https://travis-ci.com/louisjordan/md2impress)
-:pencil: a Markdown to Impress.js presentation generator
+:pencil: generate web presentations from markdown!
 
 ## Installation
 
@@ -10,8 +10,15 @@ $ git clone git@github.com:louisjordan/md2impress.git 	# via github
 ```
 
 ## Usage
-md2impress uses the Universal Module Definition (UMD) which means it can work in Node as well as the browser.
+md2impress works in the browser *and* in Node *and* has a CLI interface
 
+
+*CLI*
+
+```bash
+$ npm install --global md2impress
+$ md2impress -i input/path -o output/path
+```
 
 *Node*
 
@@ -36,7 +43,7 @@ const html = md2impress(markdown);
 <!doctype html>
 <html>
   <body>
-
+    <div id="presentation">
     <script src="path/to/md2impress.min.js"></script>
     <script>
       const markdown = `
