@@ -15,14 +15,14 @@ const parser = {
     // reducer function to convert array of step content strings into array of objects
     const stepMarkdownReducer = (stepAccumulator, content) => {
       stepAccumulator.push({
-        attributes: extractStepAttributes(content),
+        attributes: parseStepAttributes(content),
         content
       });
 
       return stepAccumulator;
     };
 
-    return extractSteps(markdown).reduce(stepMarkdownReducer, []);
+    return parseSteps(markdown).reduce(stepMarkdownReducer, []);
   }
 };
 
@@ -30,19 +30,19 @@ const parser = {
  * Split input markdown string into steps based on a regex pattern
  * @param {*} markdown
  */
-const extractSteps = markdown => {
+const parseSteps = markdown => {
   const steps = markdown.split(/-{6}/); // TODO: Improve this splitting regex
   return steps;
 };
 
 /**
- * extracts the attributes from a step's first comment
+ * parses the attributes from a step's first comment
  * supports both colon and equals notations ( : or = )
  * step comments should look like this:
  *   <!-- x:1 y:0 rotate=200 -->
  * @param {*} content
  */
-const extractStepAttributes = content => {
+const parseStepAttributes = content => {
   const values = content.match(/\s?(\w+[:=]\w+)\s?/gi) || []; // TODO: 100% needs improvement
 
   const attributes = values.reduce((attrAccumulator, attr) => {
