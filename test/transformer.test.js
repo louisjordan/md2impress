@@ -10,8 +10,12 @@ describe('transformer', () => {
   test('should not alter attributes if a null or manual layout is provided', () => {
     expect(transformer.transform(simpleSteps)[0].attributes.x).toBe('0');
     expect(transformer.transform(simpleSteps)[0].attributes.y).toBe('0');
-    expect(transformer.transform(simpleSteps, 'manual')[0].attributes.x).toBe('0');
-    expect(transformer.transform(simpleSteps, 'manual')[0].attributes.y).toBe('0');
+    expect(transformer.transform(simpleSteps, 'manual')[0].attributes.x).toBe(
+      '0'
+    );
+    expect(transformer.transform(simpleSteps, 'manual')[0].attributes.y).toBe(
+      '0'
+    );
   });
 });
 

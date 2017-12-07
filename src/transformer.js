@@ -22,8 +22,8 @@ const transformer = {
     return output;
   },
   whitelist: {
-    horizontal: require('./layouts/horizontal')
-    // vertical: require('./layouts/vertical')
+    horizontal: require('./layouts/horizontal'),
+    vertical: require('./layouts/vertical')
   }
 };
 

@@ -15,7 +15,7 @@ const generator = {
       const contentHtml = marked(step.content).replace(/<!--.+-->\n/, ''); // convert to html and remove comments
       const stepHtml = templates.step
         .replace('{{ id }}', `id-${index}`) // TODO: step id, from h1/h2? - Check for 'id' in attributes -> use instead of increment -> remove from attributes
-                                            // TODO: check for 'class' in attributes -> insert into step html -> remove from attributes
+        // TODO: check for 'class' in attributes -> insert into step html -> remove from attributes
         .replace('{{ attributes }}', attrHtml)
         .replace('{{ content }}', contentHtml);
 
