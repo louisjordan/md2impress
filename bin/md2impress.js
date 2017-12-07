@@ -42,15 +42,20 @@ const layout = program.layout || 'manual';
 fs.readFile(inputPath, 'utf8', (err, input) => {
   if (err) throw err;
 
-  const html = md2impress(input, layout); // TODO: Handle error here if layout is not supported
+  try {
+    const html = md2impress(input, layout); // TODO: Handle error here if layout is not supported
 
-  fs.writeFile(ouputPath, html, err => {
-    if (err) throw err;
-    console.log(`
+    fs.writeFile(ouputPath, html, err => {
+      if (err) throw err;
+      console.log(`
 Save successful!
 Base path: ${basePath}
       [MD] /${program.input}
     [HTML] /${program.output}`);
+      process.exit();
+    });
+  } catch (error) {
+    console.error(error);
     process.exit();
-  });
+  }
 });

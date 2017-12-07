@@ -1,10 +1,11 @@
 const { parse } = require('./parser');
-const { transform } = require('./transformer');
+const { transform, whitelist } = require('./transformer');
 const { generate } = require('./generator');
 
 function md2impress(markdown, layout = 'manual') {
-  // TODO: Check layout is supported - transformer.whitelist
-  
+  if (layout !== 'manual' && !Object.keys(whitelist).includes(layout))
+    throw Error(`Layout '${layout}' is not supported`);
+
   return generate(transform(parse(markdown), layout));
 }
 
