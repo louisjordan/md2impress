@@ -16,9 +16,9 @@ const parser = {
       throw Error(`Input must be of type string not ${typeof markdown}`);
 
     // reducer function to convert array of step content strings into array of objects
-    const stepMarkdownReducer = (stepAccumulator, content) => {
+    const stepMarkdownReducer = (stepAccumulator, content, index) => {
       stepAccumulator.push({
-        attributes: parseStepAttributes(content),
+        attributes: parseStepAttributes(content, index),
         content
       });
 
@@ -45,10 +45,10 @@ const parseSteps = markdown => {
  *   <!-- x:1 y:0 rotate=200 -->
  * @param {*} content
  */
-const parseStepAttributes = content => {
-  const values = content.match(/\s?(\w+[:=]\w+)\s?/gi) || []; // TODO: 100% needs improvement
+const parseStepAttributes = (content, index) => {
+  const attrs = content.match(/(\w+[:=][-\w]+)/gi) || []; // TODO: 100% needs improvement
 
-  const attributes = values.reduce((attrAccumulator, attr) => {
+  const attributes = attrs.reduce((attrAccumulator, attr, i) => {
     const values = attr
       .replace(/^\s+|\s+$/g, '') // remove leading & trailing whitespace
       .split(/[:=]/); // split on : or =
@@ -57,6 +57,15 @@ const parseStepAttributes = content => {
 
     return attrAccumulator;
   }, {});
+
+  if (!attributes.id) {
+    // if no id specified, look for a heading. Failing that, use a step index.
+    const heading = content.match(/^#{1,6}\s(.+)/);
+
+    attributes.id = heading
+      ? heading[0].replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]+/g, '')
+      : `step-${index}`;
+  }
 
   return attributes;
 };
