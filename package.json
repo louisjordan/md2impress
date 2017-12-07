@@ -1,14 +1,17 @@
 {
   "name": "md2impress",
-  "version": "0.0.0",
+  "version": "0.0.4",
   "description": "a Markdown to Impress.js presentation generator",
   "main": "src/index.js",
-  "repository": "git@github.com:louisjordan/md2impress.git",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/louisjordan/md2impress.git"
+  },
   "author": "Louis Jordan <louisjordan@hotmail.com>",
   "license": "MIT",
   "scripts": {
     "build": "webpack",
-    "cli-dev": "nodemon bin/md2impress --input test/data/cli_input.md --output ./_temp/cli_output.html",
+    "cli-dev": "nodemon bin/md2impress --input test/data/cli_input.md --output _temp/cli_output.html",
     "lint": "prettier --single-quote -l --write \"{src,test}/**/*.js\"",
     "pre-commit": "npm run build && npm run lint",
     "test": "jest"
@@ -24,5 +27,25 @@
   "dependencies": {
     "commander": "^2.12.2",
     "marked": "^0.3.6"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/louisjordan/md2impress/issues"
+  },
+  "homepage": "https://github.com/louisjordan/md2impress#readme",
+  "bin": {
+    "md2impress": "bin/md2impress.js"
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "keywords": [
+    "markdown",
+    "impress",
+    "presentation",
+    "generator",
+    "node",
+    "browser",
+    "cli"
+  ]
 }

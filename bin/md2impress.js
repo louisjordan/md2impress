@@ -43,11 +43,14 @@ fs.readFile(inputPath, 'utf8', (err, input) => {
   if (err) throw err;
 
   const html = md2impress(input, layout); // TODO: Handle error here if layout is not supported
-  console.log(html);
 
   fs.writeFile(ouputPath, html, err => {
     if (err) throw err;
-    console.log(`Save successful! base path: ${basePath} saved: [MD] ${program.input} [HTML] ${program.output}`);
+    console.log(`
+Save successful!
+Base path: ${basePath}
+      [MD] /${program.input}
+    [HTML] /${program.output}`);
     process.exit();
   });
 });
