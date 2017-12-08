@@ -16,7 +16,7 @@ const generator = {
 
       const stepHtml = templates.step
         .replace('{{ id }}', step.id)
-        // TODO: check for 'class' in attributes -> insert into step html -> remove from attributes
+        .replace('{{ class }}', step.class ? step.class : '')
         .replace('{{ attributes }}', attrHtml)
         .replace('{{ content }}', contentHtml);
 

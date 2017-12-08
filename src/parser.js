@@ -6,7 +6,9 @@ const parser = {
    *
    * step = {
    *   attributes: {x: 10, y: 100},
-   *   content: '<h1>Slide title</h1>'
+   *   content: '<h1>Slide title</h1>',
+   *   id: 'step-1',
+   *   class: 'slide blue'
    * };
    *
    * @param {string} markdown
@@ -35,15 +37,22 @@ const parser = {
         delete step.attributes.id;
       }
 
+      // if class attribute is found, replace delimiter with a space and move from step.attributes to step
+      if (step.attributes.class) {
+        step.class = step.attributes.class.replace(/,/g, ' ');
+        delete step.attributes.class;
+      }
+
       return step;
     });
   },
+
   /**
    * Split input markdown string into steps based on a regex pattern
    * @param {*} markdown
    */
   splitSteps(markdown) {
-    const steps = markdown.split(/-{6}/); // TODO: Improve this splitting regex
+    const steps = markdown.split(/[-=]{6}/); // TODO: Improve this splitting regex
     return steps;
   },
 
@@ -55,7 +64,7 @@ const parser = {
    * @param {*} content
    */
   parseStepAttributes(content) {
-    const attrs = content.match(/(\w+[:=][-\w]+)/gi) || []; // TODO: 100% needs improvement
+    const attrs = content.match(/(\w+[:=][,-\w]+)/gi) || []; // TODO: 100% needs improvement
 
     const attributes = attrs.reduce((attrAccumulator, attr, i) => {
       const values = attr
