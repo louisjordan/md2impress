@@ -11,17 +11,16 @@ const transformer = {
     let output = steps;
 
     if (layoutName !== 'manual') {
-      if (Object.keys(transformer.whitelist).includes(layoutName)) {
-        const layout = transformer.whitelist[layoutName];
-        output = steps.map(layout.map);
-      } else {
+      if (!Object.keys(transformer.layouts).includes(layoutName))
         throw Error(`Layout "${layoutName}" not found`);
-      }
+
+      const layout = transformer.layouts[layoutName];
+      output = steps.map(layout.map);
     }
 
     return output;
   },
-  whitelist: {
+  layouts: {
     horizontal: require('./layouts/horizontal'),
     vertical: require('./layouts/vertical')
   }

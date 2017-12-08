@@ -23,6 +23,7 @@ program
   .option('-i, --input <file>', 'Markdown input file path')
   .option('-o, --output <file>', 'HTML output destination')
   .option('-l, --layout [layout]', 'Presentation layout')
+  .option('-s, --style [style]', 'Presentation style')
   .parse(process.argv);
 
 if (!program.input || !program.output) {
@@ -37,13 +38,14 @@ const inputPath = path.resolve(basePath, program.input);
 const ouputPath = path.resolve(basePath, program.output);
 
 const layout = program.layout || 'manual';
+const style = program.style || 'default';
 
 // read input file
 fs.readFile(inputPath, 'utf8', (err, input) => {
   if (err) throw err;
 
   try {
-    const html = md2impress(input, layout); // TODO: Handle error here if layout is not supported
+    const html = md2impress(input, { layout, style }); // TODO: Handle error here if layout is not supported
 
     fs.writeFile(ouputPath, html, err => {
       if (err) throw err;

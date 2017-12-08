@@ -1,12 +1,15 @@
 const { parse } = require('./parser');
-const { transform, whitelist } = require('./transformer');
-const { generate } = require('./generator');
+const { transform, layouts } = require('./transformer');
+const { generate, styles } = require('./generator');
 
-function md2impress(markdown, layout = 'manual') {
-  if (layout !== 'manual' && !Object.keys(whitelist).includes(layout))
+function md2impress(markdown, { layout = 'manual', style = 'default' } = {}) {
+  if (layout !== 'manual' && !Object.keys(layouts).includes(layout))
     throw Error(`Layout '${layout}' is not supported`);
 
-  return generate(transform(parse(markdown), layout));
+  if (style !== 'default' && !Object.keys(styles).includes(style))
+    throw Error(`Style '${style}' is not supported`);
+
+  return generate(transform(parse(markdown), layout), style);
 }
 
 if (typeof window !== 'undefined') window.md2impress = md2impress;
