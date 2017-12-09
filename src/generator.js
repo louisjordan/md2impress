@@ -9,7 +9,7 @@ const generator = {
    * returns a html string
    * @param {array} steps
    */
-  generate(steps, style = 'default') {
+  generate(steps, style = 'basic', title = 'Presentation') {
     const stepsHtml = steps.reduce((html, step, index) => {
       const attrHtml = generator.serializeAttributes(step.attributes);
       const contentHtml = marked(step.content).replace(/<!--.+-->\n/, ''); // convert to html and remove comments
@@ -27,6 +27,7 @@ const generator = {
 
     // merge html with template
     const html = templates.html
+      .replace('{{ title }}', title)
       .replace('{{ impressjs }}', templates.impressjs)
       .replace('{{ css }}', generator.styles[style].css)
       .replace('{{ steps }}', stepsHtml);
@@ -34,7 +35,7 @@ const generator = {
     return html;
   },
   styles: {
-    default: require('./styles/default'),
+    basic: require('./styles/basic'),
     'impress-demo': require('./styles/impress-demo')
   },
   /**
