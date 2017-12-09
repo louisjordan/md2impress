@@ -127,3 +127,28 @@ Supported styles:
 | ---------- | ----------------------------------------- |
 | basic      | Simple design, nothing too fancy          |
 | minimalist | Clean, simple, monochromatic style [TODO] |
+
+# Custom layouts and style
+To create a custom layout or style style
+
+_Style_
+
+- add the CSS file to `./src/styles/`
+
+_Layout_
+
+- add a JS file to `./src/layouts/` that exports a `map` iteration function (NOTE: see examples in `./src/layouts/`)
+
+_..._
+
+- add the layout/style name to `./src/supported.json` (NOTE: name _must_ be the same as filename e.g. `./src/style/basic.css = 'basic'`)
+- run `npm run build` 
+
+### Custom Styles
+It is recommended to import the `_defaults.css` file to your custom stylesheets as a base to work from:
+
+```css
+@import '_defaults.css';
+
+h1 { ...
+```
