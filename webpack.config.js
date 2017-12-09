@@ -17,6 +17,10 @@ const config = {
         options: {
           presets: ['es2015']
         }
+      },
+      {
+        test: /\.css$/,
+        loaders: ['to-string-loader', 'css-loader']
       }
     ]
   },
@@ -32,6 +36,7 @@ const config = {
     //   filename: 'vendor-[hash].min.js'
     // }),
     new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
       compress: {
         warnings: false,
         drop_console: false

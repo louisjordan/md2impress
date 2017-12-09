@@ -1,3 +1,5 @@
+const { layouts } = require('./supported');
+
 const transformer = {
   /**
    * transformer.map
@@ -7,12 +9,11 @@ const transformer = {
    * @param {array} input
    * @param {string} layout
    */
-  transform(steps, layoutName = 'manual') {
+  transform(steps, layoutName) {
     let output = steps;
 
     if (layoutName !== 'manual') {
-      if (!Object.keys(transformer.layouts).includes(layoutName))
-        throw Error(`Layout "${layoutName}" not found`);
+      if (!Object.keys(transformer.layouts).includes(layoutName)) throw Error(`Layout "${layoutName}" not found`);
 
       const layout = transformer.layouts[layoutName];
       output = steps.map(layout.map);
@@ -20,10 +21,18 @@ const transformer = {
 
     return output;
   },
-  layouts: {
-    horizontal: require('./layouts/horizontal'),
-    vertical: require('./layouts/vertical')
-  }
+  layouts: loadLayouts(layouts)
 };
+
+/**
+ * load supported css files
+ * @param {string} style
+ */
+function loadLayouts(layouts) {
+  return layouts.reduce((acc, curr) => {
+    acc[curr] = require(`./layouts/${curr}`);
+    return acc;
+  }, {});
+}
 
 module.exports = transformer;

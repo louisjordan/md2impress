@@ -39,8 +39,8 @@ const basePath = process.cwd();
 const inputPath = path.resolve(basePath, program.input);
 const ouputPath = path.resolve(basePath, program.output);
 
-const layout = program.layout || 'manual';
-const style = program.style || 'default';
+const layout = program.layout;
+const style = program.style;
 const title = program.title || helpers.prettifyString(helpers.getFilenameFromPath(program.input));
 
 // TODO: Check input/output paths and files exist

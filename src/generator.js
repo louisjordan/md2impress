@@ -1,5 +1,7 @@
 const marked = require('marked');
+const path = require('path');
 const { templates } = require('./templates');
+const { styles } = require('./supported');
 
 const generator = {
   /**
@@ -9,7 +11,7 @@ const generator = {
    * returns a html string
    * @param {array} steps
    */
-  generate(steps, style = 'basic', title = 'Presentation') {
+  generate(steps, style, title = 'Presentation') {
     const stepsHtml = steps.reduce((html, step, index) => {
       const attrHtml = generator.serializeAttributes(step.attributes);
       const contentHtml = marked(step.content).replace(/<!--.+-->\n/, ''); // convert to html and remove comments
@@ -29,15 +31,12 @@ const generator = {
     const html = templates.html
       .replace('{{ title }}', title)
       .replace('{{ impressjs }}', templates.impressjs)
-      .replace('{{ css }}', generator.styles[style].css)
+      .replace('{{ css }}', generator.styles[style])
       .replace('{{ steps }}', stepsHtml);
 
     return html;
   },
-  styles: {
-    basic: require('./styles/basic'),
-    'impress-demo': require('./styles/impress-demo')
-  },
+  styles: loadStyles(styles),
   /**
    * Converts attributes array to string to be used in html
    * @param {object} attributes
@@ -55,5 +54,29 @@ const generator = {
     return string;
   }
 };
+
+/**
+ * load supported css files
+ * @param {string} style
+ */
+function loadStyles(styles) {
+  const reducer =
+    typeof window !== 'undefined'
+      ? // if in browser, use webpack's raw-loader
+        (acc, curr) => {
+          acc[curr] = require(`./styles/${curr}.css`);
+          return acc;
+        }
+      : // if in node, use fs
+        (() => {
+          const fs = require('fs'); // load fs won't load in browser
+          return (acc, curr) => {
+            acc[curr] = fs.readFileSync(path.join(__dirname, `./styles/${curr}.css`), 'utf8');
+            return acc;
+          };
+        })();
+
+  return styles.reduce(reducer, {});
+}
 
 module.exports = generator;
