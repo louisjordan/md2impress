@@ -15,8 +15,10 @@ function loadAssets(type) {
 
   const reducer = (assetAcc, asset) => {
     if (isBrowser) {
+      // use webpack's bundled version
       assetAcc[asset] = require(`./${type}/${asset}.${ext}`);
     } else {
+      // read from file
       const fs = require('fs');
       assetAcc[asset] = fs.readFileSync(path.join(__dirname, `./${type}/${asset}.${ext}`), 'utf8');
     }

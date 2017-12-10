@@ -1,9 +1,9 @@
-const stepWidth = 900;
+const defaults = require('./_defaults');
 
 const horizontal = {
   map: (step, index) => {
     step.attributes = {
-      x: String(stepWidth * index)
+      x: String(defaults.stepWidth * index)
     };
 
     return step;
