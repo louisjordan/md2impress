@@ -2,6 +2,8 @@ const webpack = require('webpack');
 const path = require('path');
 
 const config = {
+  devtool: 'source-map',
+  target: 'web',
   entry: './src',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -24,8 +26,6 @@ const config = {
       }
     ]
   },
-  devtool: 'source-map',
-  target: 'web',
   plugins: [
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.DefinePlugin({
