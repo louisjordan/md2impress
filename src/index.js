@@ -1,14 +1,11 @@
-const { parse } = require('./parser');
-const { transform } = require('./transformer');
-const { generate } = require('./generator');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import registerServiceWorker from './registerServiceWorker';
 
-function md2impress(markdown, layout = 'manual') {
-  console.log(markdown);
+import App from './components/App/App';
 
-  // TODO: Check layout is supported - transformer.whitelist
-  return generate(transform(parse(markdown), layout));
-}
+import './assets/base.css';
+import 'semantic-ui-css/semantic.min.css';
 
-if (typeof window !== 'undefined') window.md2impress = md2impress;
-
-module.exports = md2impress;
+ReactDOM.render(<App />, document.getElementById('root'));
+registerServiceWorker();

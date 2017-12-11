@@ -1,0 +1,9 @@
+.toolbar-container {
+  height: 50px;
+  margin-top: 8px;
+  flex-grow: 1;
+}
+
+.toolbar-container .dropdown {
+  margin-right: 8px;
+}

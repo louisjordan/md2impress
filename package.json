@@ -1,28 +1,24 @@
 {
-  "name": "md2impress",
-  "version": "0.0.0",
-  "description": "a Markdown to Impress.js presentation generator",
-  "main": "src/index.js",
-  "repository": "git@github.com:louisjordan/md2impress.git",
-  "author": "Louis Jordan <louisjordan@hotmail.com>",
-  "license": "MIT",
-  "scripts": {
-    "build": "webpack",
-    "cli-dev": "nodemon bin/md2impress --input test/data/cli_input.md --output ./_temp/cli_output.html",
-    "lint": "prettier --single-quote -l --write \"{src,test}/**/*.js\"",
-    "pre-commit": "npm run build && npm run lint",
-    "test": "jest"
-  },
+  "name": "gh-pages",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://louisjordan.github.io/md2impress",
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-es2015": "^6.24.1",
-    "jest": "@21.2.1",
-    "prettier": "^1.8.2",
-    "webpack": "@3.6.0"
+    "gh-pages": "^1.1.0",
+    "react-scripts": "1.0.17"
   },
   "dependencies": {
-    "commander": "^2.12.2",
-    "marked": "^0.3.6"
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "semantic-ui-css": "^2.2.12",
+    "semantic-ui-react": "^0.77.0"
+  },
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "npm run predeploy && gh-pages -d build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }
