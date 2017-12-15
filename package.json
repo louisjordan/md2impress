@@ -33,7 +33,7 @@
   "bugs": {
     "url": "https://github.com/louisjordan/md2impress/issues"
   },
-  "homepage": "https://github.com/louisjordan/md2impress#readme",
+  "homepage": "https://louisjordan.github.io/md2impress",
   "bin": {
     "md2impress": "bin/md2impress.js"
   },

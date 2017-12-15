@@ -6,9 +6,9 @@ const config = {
   target: 'web',
   entry: './src',
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'md2impress.min.js'
-    // libraryTarget: 'umd'
+    path: [path.resolve(__dirname, 'dist'), path.resolve(__dirname, 'gh-pages/src/assets')],
+    filename: 'md2impress.min.js',
+    libraryTarget: 'browser'
   },
   module: {
     rules: [
@@ -41,4 +41,18 @@ const config = {
   ]
 };
 
-module.exports = config;
+const ghpages = Object.assign({}, config, {
+  output: {
+    path: path.resolve(__dirname, 'gh-pages/src/assets'),
+    filename: 'md2impress.min.js'
+  }
+});
+
+const md2impress = Object.assign({}, config, {
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'md2impress.min.js'
+  }
+});
+
+module.exports = [ghpages, md2impress];
