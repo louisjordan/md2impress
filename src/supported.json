@@ -1,4 +1,4 @@
 {
-  "layouts": ["horizontal", "vertical"],
+  "layouts": ["horizontal", "vertical", "radial"],
   "styles": ["basic", "impress-demo"]
 }
