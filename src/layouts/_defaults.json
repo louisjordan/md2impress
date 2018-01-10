@@ -1,4 +1,5 @@
 {
   "stepWidth": 1200,
-  "stepHeight": 900
+  "stepHeight": 900,
+  "perspective": 1200
 }

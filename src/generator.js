@@ -14,12 +14,12 @@ const styles = loadAssets('styles');
  */
 function generate(steps, style, title = 'Presentation') {
   const stepsHtml = steps.reduce((html, step, index) => {
-    const attrHtml = serializeAttributes(step.attributes);
+    const attrHtml = serializeLayoutAttributes(step.layout);
     const contentHtml = marked(step.content).replace(/<!--.+-->\n/, ''); // convert to html and remove comments
 
     const stepHtml = templates.step
-      .replace('{{ id }}', step.id)
-      .replace('{{ class }}', step.class ? step.class : '')
+      .replace('{{ id }}', step.metadata.id)
+      .replace('{{ class }}', step.metadata.class ? step.metadata.class : '')
       .replace('{{ attributes }}', attrHtml)
       .replace('{{ content }}', contentHtml);
 
@@ -42,12 +42,11 @@ function generate(steps, style, title = 'Presentation') {
  * Converts attributes array to string to be used in html
  * @param {object} attributes
  */
-function serializeAttributes(attributes) {
+function serializeLayoutAttributes(attributes) {
   let string = '';
 
   for (const attr in attributes) {
     if (attributes.hasOwnProperty(attr)) {
-      // TODO: Whitelist attributes
       string += `data-${attr}="${attributes[attr]}" `;
     }
   }

@@ -1,6 +1,18 @@
 // replace spaces with hyphens and remove any non-word characters
 const sanitize = str => str.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]+/g, '');
 
+const layoutAttributes = [
+  'x',
+  'y',
+  'z',
+  'rotate',
+  'rotate-x',
+  'rotate-y',
+  'rotate-z',
+  'rotate-order',
+  'scale'
+];
+
 /**
  * Parser.parse
  * accepts a markdown string
@@ -16,29 +28,30 @@ const sanitize = str => str.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]+/g, '');
  * @param {string} markdown
  */
 function parse(markdown) {
-  if (typeof markdown !== 'string') throw Error(`Input must be of type string not ${typeof markdown}`);
+  if (typeof markdown !== 'string')
+    throw Error(`Input must be of type string not ${typeof markdown}`);
 
   const steps = splitSteps(markdown).map((content, index) => {
     // map step string to step object
+
+    const stepAttributes = parseStepAttributes(content);
+
     const step = {
-      attributes: parseStepAttributes(content),
+      layout: extractLayoutAttributes(stepAttributes),
+      metadata: extractMetaData(stepAttributes),
       content
     };
 
     // if no id attribute specified, look for a heading. Failing that, use a step index
-    if (!step.attributes.id) {
+    if (!step.metadata.id) {
       const heading = content.match(/^#{1,6}\s(.+)/);
-      step.id = heading && heading.length ? sanitize(heading[0]) : `step-${index}`;
-    } else {
-      // if found, move id from step.attribute into step so it doesn't get over written
-      step.id = step.attributes.id;
-      delete step.attributes.id;
+      step.metadata.id =
+        heading && heading.length ? sanitize(heading[0]) : `step-${index}`;
     }
 
-    // if class attribute is found, replace delimiter with a space and move from step.attributes to step
-    if (step.attributes.class) {
-      step.class = step.attributes.class.replace(/,/g, ' ');
-      delete step.attributes.class;
+    // if class attribute is found, replace delimiter with a space
+    if (step.metadata.class) {
+      step.metadata.class = step.metadata.class.replace(/,/g, ' ');
     }
 
     return step;
@@ -52,7 +65,7 @@ function parse(markdown) {
  * @param {*} markdown
  */
 function splitSteps(markdown) {
-  const steps = markdown.split(/[-=]{6}/); // TODO: Improve this splitting regex
+  const steps = markdown.split(/[-=]{4,8}/); // TODO: Improve this splitting regex
   return steps;
 }
 
@@ -77,6 +90,24 @@ function parseStepAttributes(content) {
   }, {});
 
   return attributes;
+}
+
+function extractLayoutAttributes(attributes) {
+  return Object.keys(attributes).reduce((acc, attr) => {
+    if (layoutAttributes.indexOf(attr) > -1) {
+      acc[attr] = attributes[attr];
+    }
+    return acc;
+  }, {});
+}
+
+function extractMetaData(attributes) {
+  return Object.keys(attributes).reduce((acc, attr) => {
+    if (layoutAttributes.indexOf(attr) === -1) {
+      acc[attr] = attributes[attr];
+    }
+    return acc;
+  }, {});
 }
 
 module.exports = { parse };

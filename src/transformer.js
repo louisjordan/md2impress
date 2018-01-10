@@ -13,6 +13,7 @@ const layouts = loadAssets('layouts');
 function transform(steps, layoutName) {
   if (layoutName !== 'manual' && isSupported('layouts', layoutName)) {
     const layout = layouts[layoutName];
+
     steps = steps.map(layout.map);
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "md2impress",
-  "version": "0.0.51",
+  "version": "0.0.6",
   "description": "a Markdown to Impress.js presentation generator",
   "main": "src/index.js",
   "repository": {

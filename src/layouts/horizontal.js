@@ -2,7 +2,7 @@ const defaults = require('./_defaults');
 
 const horizontal = {
   map: (step, index) => {
-    step.attributes = {
+    step.layout = {
       x: String(defaults.stepWidth * index)
     };
 

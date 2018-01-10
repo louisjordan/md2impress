@@ -2,7 +2,7 @@ const defaults = require('./_defaults');
 
 const vertical = {
   map: (step, index) => {
-    step.attributes = {
+    step.layout = {
       y: String(defaults.stepHeight * index)
     };
 
