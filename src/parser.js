@@ -44,9 +44,9 @@ function parse(markdown) {
 
     // if no id attribute specified, look for a heading. Failing that, use a step index
     if (!step.metadata.id) {
-      const heading = content.match(/^#{1,6}\s(.+)/);
+      const heading = content.match(/^#{1,6}\s+(.+)/);
       step.metadata.id =
-        heading && heading.length ? sanitize(heading[0]) : `step-${index}`;
+        heading && heading.length ? sanitize(heading[1]) : `step-${index}`;
     }
 
     // if class attribute is found, replace delimiter with a space
