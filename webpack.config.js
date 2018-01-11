@@ -6,7 +6,7 @@ const config = {
   target: 'web',
   entry: './src',
   output: {
-    path: [path.resolve(__dirname, 'dist'), path.resolve(__dirname, 'gh-pages/src/assets')],
+    path: [path.resolve(__dirname, 'dist'), path.resolve(__dirname, 'app/src/assets')],
     filename: 'md2impress.min.js',
     libraryTarget: 'browser'
   },
@@ -41,9 +41,10 @@ const config = {
   ]
 };
 
-const ghpages = Object.assign({}, config, {
+// send a build to web app
+const app = Object.assign({}, config, {
   output: {
-    path: path.resolve(__dirname, 'gh-pages/src/assets'),
+    path: path.resolve(__dirname, 'app/src/assets'),
     filename: 'md2impress.min.js'
   }
 });
@@ -55,4 +56,4 @@ const md2impress = Object.assign({}, config, {
   }
 });
 
-module.exports = [ghpages, md2impress];
+module.exports = [app, md2impress];

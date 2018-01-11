@@ -11,7 +11,7 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack",
-    "cli-dev": "nodemon bin/md2impress --input test/data/cli_input.md --output _temp/cli_output.html -s impress-demo",
+    "cli-dev": "nodemon cli/md2impress --input test/data/cli_input.md --output _temp/cli_output.html -s impress-demo",
     "lint": "prettier --single-quote -l --write \"{src,test}/**/*.js\"",
     "pre-commit": "npm run build && npm run lint",
     "test": "jest"
@@ -35,7 +35,7 @@
   },
   "homepage": "https://louisjordan.github.io/md2impress",
   "bin": {
-    "md2impress": "bin/md2impress.js"
+    "md2impress": "cli/md2impress.js"
   },
   "directories": {
     "doc": "docs",
