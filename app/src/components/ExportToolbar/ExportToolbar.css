@@ -1,0 +1,9 @@
+.export-toolbar-container {
+  height: 38px;
+  margin-top: 8px;
+  flex-grow: 1;
+}
+
+.export-toolbar-container button {
+  float: right;
+}

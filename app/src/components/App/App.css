@@ -1,0 +1,28 @@
+.App {
+  height: 100%;
+  width: 100%;
+  padding: 35px 50px;
+}
+
+.app-container,
+.app-container .segment {
+  height: 100%;
+}
+
+.app-container .segment {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+}
+
+.title-input {
+  width: 100%;
+  margin-bottom: 8px;
+  font-size: 1.3em;
+}
+
+@media (max-width: 1050px) {
+  .app-container .column {
+    width: 100% !important;
+  }
+}

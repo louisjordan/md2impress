@@ -1,0 +1,9 @@
+.input-container {
+  height: 100%;
+  flex-grow: 2;
+}
+
+.markdown-input {
+  height: 100%;
+  font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
