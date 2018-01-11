@@ -84,7 +84,7 @@ video {
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit;
+  font-family: inherit;
   vertical-align: baseline;
 }
 
@@ -128,6 +128,13 @@ table {
 
 /* End Reset */
 
+table, tr, td, th {
+  border: 1px solid #111;
+  border-collapse: collapse;
+  border-spacing: 3px;
+  padding: 4px 8px;
+}
+
 .step {
   /* position: relative; */
   width: 900px;
@@ -166,8 +173,9 @@ h2 {
 }
 
 p,
-ul {
-  margin: 24px 96px;
+ul,
+table {
+  margin: 24px 40px;
 }
 
 ul {
