@@ -1,5 +1,6 @@
 import React from 'react';
 import { Dropdown } from 'semantic-ui-react';
+import HelpDialog from '../HelpDialog/HelpDialog';
 
 import './InputToolbar.css';
 
@@ -43,6 +44,7 @@ const InputToolbar = props => {
         options={styleOptions}
         onChange={handleStyleChange}
       />
+      <HelpDialog />
     </div>
   );
 };
