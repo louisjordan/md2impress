@@ -5,11 +5,7 @@ const config = {
   devtool: 'source-map',
   target: 'web',
   entry: './src',
-  output: {
-    path: [path.resolve(__dirname, 'dist'), path.resolve(__dirname, 'app/src/assets')],
-    filename: 'md2impress.min.js',
-    libraryTarget: 'browser'
-  },
+  output: {},
   module: {
     rules: [
       {

@@ -106,10 +106,7 @@ class App extends Component {
           </Grid.Column>
           <Grid.Column>
             <Segment>
-              <PresentationFrame
-                {...this.state}
-                update={{ step: this.updateStep }}
-              />
+              <PresentationFrame {...this.state} update={{ step: this.updateStep }} />
               <ExportToolbar {...this.state} />
             </Segment>
           </Grid.Column>

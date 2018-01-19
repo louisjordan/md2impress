@@ -3,7 +3,6 @@ const { layout } = require('./layoutEngine');
 const { generate } = require('./generator');
 const { isSupported } = require('./utils');
 
-
 function md2impress(
   markdown,
   { layoutName = 'manual', style = 'basic', title = 'Presentation' } = {}

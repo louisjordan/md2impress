@@ -4,10 +4,7 @@ const path = require('path');
 const isBrowser = typeof window !== 'undefined';
 
 function isSupported(type, name) {
-  if (type && name)
-    return (
-      Object.keys(supported).includes(type) && supported[type].includes(name)
-    );
+  if (type && name) return Object.keys(supported).includes(type) && supported[type].includes(name);
   else if (type) return Object.keys(supported).includes(type);
 }
 
@@ -30,10 +27,7 @@ function loadAssets(assetType) {
         'utf8'
       );
 
-      const _defaultCss = fs.readFileSync(
-        path.join(__dirname, `./styles/_defaults.css`),
-        'utf8'
-      );
+      const _defaultCss = fs.readFileSync(path.join(__dirname, `./styles/_defaults.css`), 'utf8');
 
       // replace @import "_defaults.css"; (and other import variations) with _default.css file as the import wont be resolved by node
       assetAcc[asset] = assetAcc[asset].replace(
