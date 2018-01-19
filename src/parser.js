@@ -21,7 +21,7 @@ const layoutAttributes = [
  * Parser.parse
  * accepts a markdown string
  * returns an array of steps
- * 
+ *
  * <!-- x:10 y:100 id:step-1 class:slide,blue -->
  * step = {
  *   layout: {x: 10, y: 100},
@@ -82,17 +82,17 @@ function splitSteps(markdown) {
  * @param {*} content
  */
 function parseStepAttributes(content) {
-  // extract step metadata and layout attributes  
+  // extract step metadata and layout attributes
   const attrStringMatch = content.match(/^<!--(.+)-->/);
 
-  const attrs = attrStringMatch && attrStringMatch.length
-    ? attrStringMatch[0].match(/([\w-]+[:=][,-\w]+)/gi)
-    : [];
+  const attrs =
+    attrStringMatch && attrStringMatch.length
+      ? attrStringMatch[0].match(/([\w-]+[:=][,-\w]+)/gi)
+      : [];
 
   // convert attribute strings into object
   const attributes = attrs.reduce((attrAccumulator, attr, i) => {
-    const values = trimWhitespace(attr)
-      .split(/[:=]/); // split on : or =
+    const values = trimWhitespace(attr).split(/[:=]/); // split on : or =
 
     if (values.length === 2) attrAccumulator[values[0]] = values[1];
 
@@ -104,7 +104,7 @@ function parseStepAttributes(content) {
 
 // organise attributes into metadata and layout
 function organiseAttributes(attrs) {
-  const attributes = {metadata: {}, layout: {}};
+  const attributes = { metadata: {}, layout: {} };
 
   Object.keys(attrs).forEach(attr => {
     if (layoutAttributes.indexOf(attr) > -1) {
