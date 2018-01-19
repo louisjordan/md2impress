@@ -36,7 +36,7 @@ const ExportToolbar = props => {
 
   return (
     <div className="export-toolbar-container">
-      <Button onClick={exportZIP}>Export as ZIP</Button>
+      <Button onClick={exportZIP}>Export ZIP</Button>
       <Button onClick={exportHTML}>Export HTML</Button>
       <Button onClick={exportMarkdown}>Export Markdown</Button>
     </div>

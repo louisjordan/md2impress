@@ -1,7 +1,14 @@
 .App {
   height: 100%;
   width: 100%;
-  padding: 35px 50px;
+  padding: 35px 50px 10px 50px;
+}
+
+.app-container {
+  margin-top: -1rem !important;
+  margin-bottom: -1rem !important;
+  margin-left: -2rem !important;
+  margin-right: -2rem !important;
 }
 
 .app-container,
@@ -21,8 +28,14 @@
   font-size: 1.3em;
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1065px) {
   .app-container .column {
     width: 100% !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .App {
+    padding: 20px 10px 0 10px;
   }
 }
