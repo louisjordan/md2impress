@@ -1,6 +1,9 @@
 // replace spaces with hyphens and remove any non-word characters
 const sanitize = str => str.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]+/g, '');
 
+// trim whitespace
+const trimWhitespace = str => str.replace(/^\s+|\s+$/g, '');
+
 const layoutAttributes = [
   'x',
   'y',
@@ -10,19 +13,20 @@ const layoutAttributes = [
   'rotate-y',
   'rotate-z',
   'rotate-order',
-  'scale'
+  'scale',
+  'autoplay'
 ];
 
 /**
  * Parser.parse
  * accepts a markdown string
  * returns an array of steps
- *
+ * 
+ * <!-- x:10 y:100 id:step-1 class:slide,blue -->
  * step = {
- *   attributes: {x: 10, y: 100},
- *   content: '<h1>Slide title</h1>',
- *   id: 'step-1',
- *   class: 'slide blue'
+ *   layout: {x: 10, y: 100},
+ *   metadata: {id: 'step-1', class: 'slide blue'}
+ *   content: '<h1>Slide title</h1>'
  * };
  *
  * @param {string} markdown
@@ -37,8 +41,8 @@ function parse(markdown) {
     const stepAttributes = parseStepAttributes(content);
 
     const step = {
-      layout: extractLayoutAttributes(stepAttributes),
-      metadata: extractMetaData(stepAttributes),
+      layout: stepAttributes.layout,
+      metadata: stepAttributes.metadata,
       content
     };
 
@@ -49,7 +53,7 @@ function parse(markdown) {
         heading && heading.length ? sanitize(heading[1]) : `step-${index}`;
     }
 
-    // if class attribute is found, replace delimiter with a space
+    // if class attribute is found, replace seperator with a space
     if (step.metadata.class) {
       step.metadata.class = step.metadata.class.replace(/,/g, ' ');
     }
@@ -65,7 +69,8 @@ function parse(markdown) {
  * @param {*} markdown
  */
 function splitSteps(markdown) {
-  const steps = markdown.split(/[-=]{4,8}/); // TODO: Improve this splitting regex
+  let steps = markdown.split(/^[-=]{4,}$/m); // split on at least four hyphens or equals
+  steps = steps.map(content => trimWhitespace(content));
   return steps;
 }
 
@@ -77,11 +82,16 @@ function splitSteps(markdown) {
  * @param {*} content
  */
 function parseStepAttributes(content) {
-  const attrs = content.match(/(\w+[:=][,-\w]+)/gi) || []; // TODO: 100% needs improvement
+  // extract step metadata and layout attributes  
+  const attrStringMatch = content.match(/^<!--(.+)-->/);
 
+  const attrs = attrStringMatch && attrStringMatch.length
+    ? attrStringMatch[0].match(/([\w-]+[:=][,-\w]+)/gi)
+    : [];
+
+  // convert attribute strings into object
   const attributes = attrs.reduce((attrAccumulator, attr, i) => {
-    const values = attr
-      .replace(/^\s+|\s+$/g, '') // remove leading & trailing whitespace
+    const values = trimWhitespace(attr)
       .split(/[:=]/); // split on : or =
 
     if (values.length === 2) attrAccumulator[values[0]] = values[1];
@@ -89,25 +99,22 @@ function parseStepAttributes(content) {
     return attrAccumulator;
   }, {});
 
-  return attributes;
+  return organiseAttributes(attributes);
 }
 
-function extractLayoutAttributes(attributes) {
-  return Object.keys(attributes).reduce((acc, attr) => {
+// organise attributes into metadata and layout
+function organiseAttributes(attrs) {
+  const attributes = {metadata: {}, layout: {}};
+
+  Object.keys(attrs).forEach(attr => {
     if (layoutAttributes.indexOf(attr) > -1) {
-      acc[attr] = attributes[attr];
+      attributes.layout[attr] = attrs[attr];
+    } else {
+      attributes.metadata[attr] = attrs[attr];
     }
-    return acc;
-  }, {});
-}
+  });
 
-function extractMetaData(attributes) {
-  return Object.keys(attributes).reduce((acc, attr) => {
-    if (layoutAttributes.indexOf(attr) === -1) {
-      acc[attr] = attributes[attr];
-    }
-    return acc;
-  }, {});
+  return attributes;
 }
 
 module.exports = { parse };
