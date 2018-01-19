@@ -3,13 +3,13 @@
   "name": "Markdown to Impress Presentation Generator using md2impress",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "favicon-32.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     }
   ],
   "start_url": "./index.html",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#333333",
   "background_color": "#ffffff"
 }
