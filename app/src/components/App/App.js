@@ -10,9 +10,24 @@ import PresentationFrame from '../PresentationFrame/PresentationFrame';
 
 import './App.css';
 
+const defaultMarkdown = `<!-- x:0 y:0 -->
+# Example presentation
+======
+<!-- x:2000 y:2000 scale:2 rotate-y:-90 -->
+## Layout and Metadata Attributes
+Use markdown comments to specify slide layout and metadata.
+\`\`\`
+<!-- x:10 y:10 rotate=180 scale:3 class=step,blue -->
+\`\`\`
+======
+<!-- x:-1500 y:1000 scale:1  rotate-x:80 -->
+## Leverage Markdown
+`;
+
 class App extends Component {
   constructor() {
     super();
+
     this.state = {
       title: '',
       layout: 'manual',
@@ -58,7 +73,7 @@ class App extends Component {
       layout: window.localStorage.getItem('layout') || 'manual',
       style: window.localStorage.getItem('style') || 'basic',
       title: window.localStorage.getItem('title') || '',
-      markdown: window.localStorage.getItem('markdown') || '',
+      markdown: window.localStorage.getItem('markdown') || defaultMarkdown,
       step: window.localStorage.getItem('step') || ''
     });
   }

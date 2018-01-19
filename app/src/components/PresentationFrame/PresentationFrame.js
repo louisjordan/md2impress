@@ -13,10 +13,7 @@ class PresentationFrame extends Component {
     let html = window.md2impress(markdown, { title, layout, style });
 
     if (step) {
-      html = html.replace(
-        'impress().init();',
-        `impress().init(); impress().goto('${step}');`
-      );
+      html = html.replace('impress().init();', `impress().init(); impress().goto('${step}');`);
     }
 
     const frameWindow = this.refs.frame.contentWindow;
@@ -51,13 +48,7 @@ class PresentationFrame extends Component {
   }
 
   render() {
-    return (
-      <iframe
-        ref="frame"
-        className="presentation-frame"
-        title={this.props.title}
-      />
-    );
+    return <iframe ref="frame" className="presentation-frame" title="output-frame" />;
   }
 }
 
