@@ -3,7 +3,7 @@
 }
 
 .help-dialog {
-  left: 50px !important;
+  left: 10vw !important;
   max-width: 95%;
   max-height: 80vh;
   width: 950px;

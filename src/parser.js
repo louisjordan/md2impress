@@ -63,7 +63,7 @@ function parse(markdown) {
  * @param {*} markdown
  */
 function splitSteps(markdown) {
-  let steps = markdown.split(/^={4,}|-{4,}$/m); // split on at least four hyphens or equals
+  let steps = markdown.split(/^={4,}$|^-{4,}$/m); // split on at least four hyphens or equals
   steps = steps.map(content => content.trim());
   return steps;
 }

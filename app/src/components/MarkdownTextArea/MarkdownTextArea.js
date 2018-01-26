@@ -6,7 +6,7 @@ import './MarkdownTextArea.css';
 class MarkdownTextArea extends Component {
   gotoStep = target => {
     const position = target.selectionStart;
-    const steps = target.value.split(/(?=^={4,}|-{4,}$)/m);
+    const steps = target.value.split(/(?=^={4,}$|^-{4,}$)/m);
 
     let stepStart = 0;
 

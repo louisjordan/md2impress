@@ -10,13 +10,13 @@ const layouts = loadAssets('layouts');
  * @param {Array} input
  * @param {String} layout
  */
-function layout(steps, layoutName) {
-  if (layoutName !== 'manual' && isSupported('layouts', layoutName)) {
-    const layoutModule = layouts[layoutName];
+function applyLayout(steps, layout) {
+  if (layout !== 'manual' && isSupported('layouts', layout)) {
+    const layoutModule = layouts[layout];
     steps = steps.map(layoutModule.map);
   }
 
   return steps;
 }
 
-module.exports = { layout };
+module.exports = { applyLayout };

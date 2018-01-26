@@ -1,18 +1,22 @@
 const { parse } = require('./parser');
-const { layout } = require('./layoutEngine');
+const { applyLayout } = require('./layoutEngine');
 const { generate } = require('./generator');
 const { isSupported } = require('./utils');
 
 function md2impress(
   markdown,
-  { layoutName = 'manual', style = 'basic', title = 'Presentation' } = {}
+  { 
+    layout = 'manual', 
+    style = 'basic', 
+    title = 'Presentation' 
+  } = {}
 ) {
-  if (layoutName !== 'manual' && !isSupported('layouts', layoutName))
-    throw Error(`Layout '${layoutName}' is not supported`);
+  if (layout !== 'manual' && !isSupported('layouts', layout))
+    throw Error(`Layout '${layout}' is not supported`);
   if (style !== 'basic' && !isSupported('styles', style))
     throw Error(`Style '${style}' is not supported`);
 
-  const html = generate(layout(parse(markdown), layoutName), style, title);
+  const html = generate(applyLayout(parse(markdown), layout), style, title);
 
   return html;
 }
