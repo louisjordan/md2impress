@@ -11,64 +11,68 @@ import PresentationFrame from '../PresentationFrame/PresentationFrame';
 import './App.css';
 
 const defaultMarkdown = `<!-- x:0 y:0 -->
+
 # Example presentation
+
 ======
 <!-- x:2000 y:2000 scale:2 rotate-y:-90 -->
+
 ## Layout and Metadata Attributes
+
 Use markdown comments to specify slide layout and metadata.
+
 \`\`\`
 <!-- x:10 y:10 rotate=180 scale:3 class=step,blue -->
 \`\`\`
+
 ======
 <!-- x:-1500 y:1000 scale:1  rotate-x:80 -->
+
 ## Leverage Markdown
+
+
 `;
 
 class App extends Component {
-  constructor() {
-    super();
+  state = {
+    title: '',
+    layout: 'manual',
+    style: 'basic',
+    markdown: '',
+    step: '',
+    inputFocused: false
+  };
 
-    this.state = {
-      title: '',
-      layout: 'manual',
-      style: 'basic',
-      markdown: '',
-      step: ''
-    };
-
-    this.updateLayout = this.updateLayout.bind(this);
-    this.updateStyle = this.updateStyle.bind(this);
-    this.updateTitle = this.updateTitle.bind(this);
-    this.updateMarkdown = this.updateMarkdown.bind(this);
-    this.updateStep = this.updateStep.bind(this);
-  }
-
-  updateLayout(layout) {
+  updateLayout = layout => {
     this.setState({ layout });
     window.localStorage.setItem('layout', layout);
-  }
+  };
 
-  updateStyle(style) {
+  updateStyle = style => {
     this.setState({ style });
     window.localStorage.setItem('style', style);
-  }
+  };
 
-  updateTitle(title) {
+  updateTitle = title => {
     this.setState({ title });
     window.localStorage.setItem('title', title);
-  }
+  };
 
-  updateMarkdown(markdown) {
+  updateMarkdown = markdown => {
     this.setState({ markdown });
     window.localStorage.setItem('markdown', markdown);
-  }
+  };
 
-  updateStep(step) {
+  updateStep = step => {
     this.setState({ step });
     window.localStorage.setItem('step', step);
-  }
+  };
 
-  componentWillMount() {
+  updateInputFocus = inputFocused => {
+    this.setState({ inputFocused });
+  };
+
+  componentWillMount = () => {
     this.setState({
       layout: window.localStorage.getItem('layout') || 'manual',
       style: window.localStorage.getItem('style') || 'basic',
@@ -76,7 +80,7 @@ class App extends Component {
       markdown: window.localStorage.getItem('markdown') || defaultMarkdown,
       step: window.localStorage.getItem('step') || ''
     });
-  }
+  };
 
   render() {
     return (
@@ -92,16 +96,17 @@ class App extends Component {
                   onKeyUp={({ target }) => {
                     this.updateTitle(target.value);
                   }}
+                  onFocus={() => this.updateInputFocus(true)}
+                  onBlur={() => this.updateInputFocus(false)}
                 />
               </Form>
               <MarkdownTextArea
                 markdown={this.state.markdown}
+                updateStep={this.updateStep}
                 updateMarkdown={this.updateMarkdown}
+                updateInputFocus={this.updateInputFocus}
               />
-              <InputToolbar
-                {...this.state}
-                update={{ layout: this.updateLayout, style: this.updateStyle }}
-              />
+              <InputToolbar {...this.state} update={{ layout: this.updateLayout, style: this.updateStyle }} />
             </Segment>
           </Grid.Column>
           <Grid.Column>

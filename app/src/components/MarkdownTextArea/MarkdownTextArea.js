@@ -4,15 +4,32 @@ import { Form, TextArea } from 'semantic-ui-react';
 import './MarkdownTextArea.css';
 
 class MarkdownTextArea extends Component {
-  constructor(props) {
-    super(props);
+  gotoStep = target => {
+    const position = target.selectionStart;
+    const steps = target.value.split(/(?=^={4,}|-{4,}$)/m);
 
-    this.handleKeyUp = this.handleKeyUp.bind(this);
-  }
+    let stepStart = 0;
 
-  handleKeyUp({ target }) {
+    for (let i = 0; i < steps.length; i++) {
+      let stepLength = steps[i].length;
+
+      if (position >= stepStart && position <= stepStart + stepLength) {
+        this.props.updateStep(i);
+        break;
+      } else {
+        stepStart += stepLength;
+      }
+    }
+  };
+
+  handleKeyUp = ({ target }) => {
     this.props.updateMarkdown(target.value);
-  }
+    this.gotoStep(target);
+  };
+
+  handleTextAreaClick = ({ target }) => {
+    this.gotoStep(target);
+  };
 
   render() {
     const placeholder = `# My presentation
@@ -27,6 +44,9 @@ class MarkdownTextArea extends Component {
           className="markdown-input"
           onKeyUp={this.handleKeyUp}
           defaultValue={this.props.markdown}
+          onClick={this.handleTextAreaClick}
+          onFocus={() => this.props.updateInputFocus(true)}
+          onBlur={() => this.props.updateInputFocus(false)}
         />
       </Form>
     );

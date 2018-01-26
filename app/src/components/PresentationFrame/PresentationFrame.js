@@ -3,21 +3,17 @@ import React, { Component } from 'react';
 import './PresentationFrame.css';
 
 class PresentationFrame extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  writeToFrame(props) {
-    const { markdown, step, title, layout, style } = props;
+  writeToFrame = props => {
+    let { markdown, step, title, layout, style } = props;
 
     let html = window.md2impress(markdown, { title, layout, style });
 
-    if (step) {
-      html = html.replace('impress().init();', `impress().init(); impress().goto('${step}');`);
+    if (step || step === 0) {
+      if (typeof step === 'string') step = `'${step}'`;
+      html = html.replace('impress().init();', `impress().init(); impress().goto(${step});`);
     }
 
-    const frameWindow = this.refs.frame.contentWindow;
-    const frameDocument = frameWindow.document;
+    const frameDocument = this.refs.frame.contentWindow.document;
 
     frameDocument.open();
     frameDocument.write(html);
@@ -28,14 +24,23 @@ class PresentationFrame extends Component {
     });
 
     frameDocument.close();
-  }
+  };
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.writeToFrame(this.props);
-  }
+    window.addEventListener('keydown', ({ keyCode }) => {
+      if (!this.props.inputFocused) {
+        const command = keyCode === 37 ? 'prev' : keyCode === 39 ? 'next' : '';
 
-  componentWillUpdate(nextProps) {
-    const { markdown, title, layout, style } = nextProps;
+        if (command) {
+          this.refs.frame.contentWindow.impress()[command]();
+        }
+      }
+    });
+  };
+
+  componentWillUpdate = nextProps => {
+    let { markdown, title, layout, style, step } = nextProps;
 
     if (
       this.props.markdown !== markdown ||
@@ -45,7 +50,12 @@ class PresentationFrame extends Component {
     ) {
       this.writeToFrame(nextProps);
     }
-  }
+
+    if (this.props.step !== step) {
+      if (typeof step === 'string') step = `'${step}'`;
+      this.refs.frame.contentWindow.impress().goto(step);
+    }
+  };
 
   render() {
     return <iframe ref="frame" className="presentation-frame" title="output-frame" />;

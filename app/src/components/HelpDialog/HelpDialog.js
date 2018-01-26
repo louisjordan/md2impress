@@ -14,8 +14,9 @@ const HelpDialog = props => {
       on="click"
       basic
       hoverable
-      position="left"
-      wide
+      position="top left"
+      className="help-dialog"
+      wide="very"
     >
       <Popup.Header>Markdown Reference</Popup.Header>
       <Popup.Content>
@@ -37,8 +38,8 @@ const HelpDialog = props => {
       </Popup.Content>
       <Popup.Header>Layout Reference</Popup.Header>
       <Popup.Content>
-        When manually laying out presentations, at the start of each slide you can specify your
-        layout parameters using a comment.<br />
+        When manually laying out presentations, at the start of each slide you can specify your layout parameters using
+        a comment.<br />
         <br />For example:<br />
         <code>{'<!-- x:100 y:100 rotate:90 -->'}</code>
         <br />
