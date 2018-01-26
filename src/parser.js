@@ -1,9 +1,6 @@
 // replace spaces with hyphens and remove any non-word characters
 const sanitize = str => str.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]+/g, '');
 
-// trim whitespace
-const trimWhitespace = str => str.replace(/^\s+|\s+$/g, '');
-
 const layoutAttributes = [
   'x',
   'y',
@@ -36,8 +33,6 @@ function parse(markdown) {
     throw Error(`Input must be of type string not ${typeof markdown}`);
 
   const steps = splitSteps(markdown).map((content, index) => {
-    // map step string to step object
-
     const stepAttributes = parseStepAttributes(content);
 
     const step = {
@@ -46,7 +41,7 @@ function parse(markdown) {
       content
     };
 
-    // if no id attribute specified, look for a heading. Failing that, use a step index
+    // if no id attribute specified, look for a heading. Failing that, use step index
     if (!step.metadata.id) {
       const heading = content.match(/^#{1,6}\s+(.+)/);
       step.metadata.id = heading && heading.length ? sanitize(heading[1]) : `step-${index}`;
@@ -68,8 +63,8 @@ function parse(markdown) {
  * @param {*} markdown
  */
 function splitSteps(markdown) {
-  let steps = markdown.split(/^[-=]{4,}$/m); // split on at least four hyphens or equals
-  steps = steps.map(content => trimWhitespace(content));
+  let steps = markdown.split(/^={4,}|-{4,}$/m); // split on at least four hyphens or equals
+  steps = steps.map(content => content.trim());
   return steps;
 }
 
@@ -81,17 +76,16 @@ function splitSteps(markdown) {
  * @param {*} content
  */
 function parseStepAttributes(content) {
-  // extract step metadata and layout attributes
-  const attrStringMatch = content.match(/^<!--(.+)-->/);
+  const attrStringMatch = content.match(/^<!--(.+)-->/); 
 
   const attrs =
-    attrStringMatch && attrStringMatch.length
-      ? attrStringMatch[0].match(/([\w-]+[:=][,-\w]+)/gi)
+    attrStringMatch && attrStringMatch.length > 1 && attrStringMatch[1].trim().length
+      ? attrStringMatch[1].match(/([\w-]+[:=][,-\w]+)/gi)
       : [];
 
   // convert attribute strings into object
   const attributes = attrs.reduce((attrAccumulator, attr, i) => {
-    const values = trimWhitespace(attr).split(/[:=]/); // split on : or =
+    const values = attr.trim().split(/[:=]/); // split on : or =
 
     if (values.length === 2) attrAccumulator[values[0]] = values[1];
 
@@ -102,18 +96,18 @@ function parseStepAttributes(content) {
 }
 
 // organise attributes into metadata and layout
-function organiseAttributes(attrs) {
-  const attributes = { metadata: {}, layout: {} };
-
-  Object.keys(attrs).forEach(attr => {
-    if (layoutAttributes.indexOf(attr) > -1) {
-      attributes.layout[attr] = attrs[attr];
+function organiseAttributes(attributes) {
+  const organisedAttributes = Object.keys(attributes).reduce((acc, attr) => {
+    if (layoutAttributes.includes(attr)) {
+      acc.layout[attr] = attributes[attr];
     } else {
-      attributes.metadata[attr] = attrs[attr];
+      acc.metadata[attr] = attributes[attr];
     }
-  });
 
-  return attributes;
+    return acc;
+  }, { metadata: {}, layout: {} });
+
+  return organisedAttributes;
 }
 
 module.exports = { parse };
