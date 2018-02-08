@@ -6,8 +6,6 @@ class PresentationFrame extends Component {
   writeToFrame = props => {
     let { markdown, step, title, layout, style } = props;
 
-    console.log(props);
-
     let html = window.md2impress(markdown, { title, layout, style });
 
     if (step || step === 0) {

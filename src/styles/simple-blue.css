@@ -1,0 +1,47 @@
+@import '_defaults.css';
+
+:root {
+  --dark-cyan: #006476;
+  --cyan: #008597;
+  --turquoise: #00c6da;
+  --light-blue: #5da5db;
+  --magenta: #990099;
+  --light-text: #cee6ea;
+}
+
+body {
+  background: var(--cyan);
+  color: var(--light-text);
+}
+
+.step {
+}
+
+.slide {
+  background: var(--dark-cyan);
+}
+
+a:link {
+  color: var(--light-blue);
+  text-decoration: none;
+}
+
+a:visited {
+  color: var(--light-blue);
+}
+
+a:hover {
+  color: var(--turquoise);
+  text-decoration: underline;
+}
+
+a:active {
+  color: var(--light-blue);
+}
+
+table,
+tr,
+td,
+th {
+  border-color: #dedede;
+}

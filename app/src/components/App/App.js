@@ -10,7 +10,7 @@ import PresentationFrame from '../PresentationFrame/PresentationFrame';
 
 import './App.css';
 
-const defaultMarkdown = `<!-- x:0 y:0 -->
+const defaultMarkdown = `<!-- x:100 y:100 -->
 
 # Example presentation
 
@@ -22,7 +22,7 @@ const defaultMarkdown = `<!-- x:0 y:0 -->
 Use markdown comments to specify slide layout and metadata.
 
 \`\`\`
-<!-- x:10 y:10 rotate=180 scale:3 class=step,blue -->
+<!-- x:300 y:250 rotate=180 scale:3 class=step,blue -->
 \`\`\`
 
 ======
@@ -30,7 +30,11 @@ Use markdown comments to specify slide layout and metadata.
 
 ## Leverage Markdown
 
+- **bold** = \`**bold**\` or \`__bold__\`
+- *italic* = \`*italic*\` or \`_italic_\`
+- [Link](http://example.com) = \`[Link](http://example.com)\`
 
+See the [ ? ] help dialog for more!
 `;
 
 class App extends Component {
@@ -106,10 +110,7 @@ class App extends Component {
                 updateMarkdown={this.updateMarkdown}
                 updateInputFocus={this.updateInputFocus}
               />
-              <InputToolbar
-                {...this.state}
-                update={{ layout: this.updateLayout, style: this.updateStyle }}
-              />
+              <InputToolbar {...this.state} update={{ layout: this.updateLayout, style: this.updateStyle }} />
             </Segment>
           </Grid.Column>
           <Grid.Column>

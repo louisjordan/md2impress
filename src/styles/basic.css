@@ -1,6 +1,27 @@
 @import '_defaults.css';
 
 .step {
+}
+
+.slide {
   border: 5px solid black;
   background: white;
+}
+
+a:link {
+  color: #3e82ce;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #4897d2;
+}
+
+a:hover {
+  color: #3b5998;
+  text-decoration: underline;
+}
+
+a:active {
+  color: #4897d2;
 }

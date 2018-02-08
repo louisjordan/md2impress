@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC|Roboto');
+@import '_defaults.css';
+
+:root {
+  --dark-cyan: #006476;
+  --cyan: #008597;
+  --turquoise: #00c6da;
+  --light-blue: #5da5db;
+  --magenta: #990099;
+  --light-text: #cee6ea;
+}
+
+body {
+  background: #f7d794;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Bowlby One SC', Helvetica, sans-serif;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.04em;
+}
+
+p {
+  font-family: Roboto, sans-serif;
+}
+
+.step {
+}
+
+.slide {
+}
+
+.slide.red {
+  background: #e77f67;
+  box-shadow: 1px 1px 0 #e15f41, 2px 2px 0 #e15f41, 3px 3px 0 #e15f41, 4px 4px 0 #e15f41, 5px 5px 0 #e15f41,
+    6px 6px 0 #e15f41, 7px 7px 0 #e15f41, 8px 8px 0 #e15f41, 9px 9px 0 #e15f41, 10px 10px 0 #e15f41, 11px 11px 0 #e15f41,
+    12px 12px 0 #e15f41, 13px 13px 0 #e15f41, 14px 14px 0 #e15f41, 15px 15px 0 #e15f41, 16px 16px 0 #e15f41;
+}
+
+.slide.blue {
+  background: #778beb;
+  box-shadow: 1px 1px 0 #546de5, 2px 2px 0 #546de5, 3px 3px 0 #546de5, 4px 4px 0 #546de5, 5px 5px 0 #546de5,
+    6px 6px 0 #546de5, 7px 7px 0 #546de5, 8px 8px 0 #546de5, 9px 9px 0 #546de5, 10px 10px 0 #546de5, 11px 11px 0 #546de5,
+    12px 12px 0 #546de5, 13px 13px 0 #546de5, 14px 14px 0 #546de5, 15px 15px 0 #546de5, 16px 16px 0 #546de5;
+}
+
+.slide.orange {
+  background: #f3a683;
+  box-shadow: 1px 1px 0 #e15f41, 2px 2px 0 #e15f41, 3px 3px 0 #e15f41, 4px 4px 0 #e15f41, 5px 5px 0 #e15f41,
+    6px 6px 0 #e15f41, 7px 7px 0 #e15f41, 8px 8px 0 #e15f41, 9px 9px 0 #e15f41, 10px 10px 0 #e15f41, 11px 11px 0 #e15f41,
+    12px 12px 0 #e15f41, 13px 13px 0 #e15f41, 14px 14px 0 #e15f41, 15px 15px 0 #e15f41, 16px 16px 0 #e15f41;
+}
+
+.slide.purple {
+  background: #786fa6;
+  box-shadow: 1px 1px 0 #574b90, 2px 2px 0 #574b90, 3px 3px 0 #574b90, 4px 4px 0 #574b90, 5px 5px 0 #574b90,
+    6px 6px 0 #574b90, 7px 7px 0 #574b90, 8px 8px 0 #574b90, 9px 9px 0 #574b90, 10px 10px 0 #574b90, 11px 11px 0 #574b90,
+    12px 12px 0 #574b90, 13px 13px 0 #574b90, 14px 14px 0 #574b90, 15px 15px 0 #574b90, 16px 16px 0 #574b90;
+}
+
+a:link {
+  color: var(--light-blue);
+  text-decoration: none;
+}
+
+a:visited {
+  color: var(--light-blue);
+}
+
+a:hover {
+  color: var(--turquoise);
+  text-decoration: underline;
+}
+
+a:active {
+  color: var(--light-blue);
+}
+
+table,
+tr,
+td,
+th {
+  border-color: #dedede;
+}
+
+img {
+  border: 10px solid #fff;
+  box-shadow: 1px 1px 0 #efefef, 2px 2px 0 #efefef, 3px 3px 0 #efefef, 4px 4px 0 #efefef, 5px 5px 0 #efefef,
+    6px 6px 0 #efefef, 7px 7px 0 #efefef;
+}

@@ -1,0 +1,48 @@
+@import '_defaults.css';
+
+:root {
+  --dark-purple: #230c33;
+  --purple: #571e55;
+  --turquoise: #00c6da;
+  --light-purple: #43347f;
+  --magenta: #990099;
+  --light-text: #cee6ea;
+}
+
+body {
+  background: radial-gradient(circle at center, var(--purple) 0, var(--dark-purple) 100%);
+  color: var(--light-text);
+}
+
+.step {
+}
+
+.slide {
+  background: var(--purple);
+}
+
+a:link {
+  color: #ddd;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #ddd;
+}
+
+a:hover {
+  color: #aaa;
+  text-decoration: underline;
+}
+
+a:active {
+  color: var(--magenta);
+  text-decoration: underline;
+}
+
+table,
+tr,
+td,
+th {
+  border-color: #dedede;
+}

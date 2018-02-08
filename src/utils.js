@@ -1,7 +1,9 @@
+import { log } from 'util';
+
 const supported = require('./supported');
 const path = require('path');
 
-const isBrowser = typeof window !== 'undefined' && console.log(this);
+const isBrowser = typeof window !== 'undefined';
 
 function isSupported(type, name) {
   if (type && name) return Object.keys(supported).includes(type) && supported[type].includes(name);
