@@ -1,56 +1,71 @@
-const parser = require('../src/parser.js');
-
-let simpleTest, complexTest;
-
-beforeAll(() => {
-  simpleTest = parser.parse(`# Test 1`);
-  complexTest = parser.parse(
-    `<!-- x=100 y=10 --> 
-    # H1 
-    ------ 
-    <!-- x=200 y=20 --> 
-    ## H2`
-  );
-});
+const { parse } = require('../src/parser.js');
+const data = require('./data').parser;
 
 describe('parser', () => {
   test('should return an array', () => {
-    expect(Array.isArray(simpleTest)).toBe(true);
+    expect(Array.isArray(parse(data.p1[0]))).toBe(true);
   });
 
-  test('should return the correct size array', () => {
-    expect(simpleTest.length).toBe(1);
-    expect(complexTest.length).toBe(2);
+  test(' [P1] should split the input into the correct number of steps', () => {
+    expect(parse(data.p1[0]).length).toBe(1);
+    expect(parse(data.p1[1]).length).toBe(2);
+  });
+
+  test(' [P2] should split steps on a new line followed by at least four hyphens followed by an end of line', () => {
+    expect(parse(data.p2[0]).length).toBe(2);
+    expect(parse(data.p2[1]).length).toBe(2);
+  });
+
+  test(' [P3] should split steps on a new line followed by at least four equals signs followed by an end of line', () => {
+    expect(parse(data.p3[0]).length).toBe(2);
+    expect(parse(data.p3[1]).length).toBe(2);
+  });
+
+  test(' [P4] should not split steps on a new line followed by less than four hyphens or equals signs followed by an end of line', () => {
+    expect(parse(data.p4[0]).length).toBe(1);
+    expect(parse(data.p4[1]).length).toBe(1);
+  });
+
+  test(' [P5] should not split steps on a new line followed by a combination of least four hyphens and equals signs', () => {
+    expect(parse(data.p5[0]).length).toBe(1);
+  });
+
+  test(' [P6] should not split the steps if delimiter is not followed by an end of line', () => {
+    expect(parse(data.p6[0]).length).toBe(1);
+  });
+
+  test(' [P7] should return the correct layout attributes for a step', () => {
+    expect(parse(data.p7[0])[0].layout).toMatchObject({ x: '1', y: '2', z: '3', rotate: '180' });
+  });
+
+  test(' [P8] should only parse attributes within a comment', () => {
+    expect(parse(data.p8[0])[0].layout).toMatchObject({ x: '10' });
+  });
+
+  test(' [P9] should allow both colon and equals signs as key/value separator', () => {
+    expect(parse(data.p9[0])[0].layout).toMatchObject({ x: '1', y: '2' });
+  });
+
+  test('[P10] should properly separate layout attributes and metadata', () => {
+    const step = parse(data.p10[0])[0];
+    expect(step.layout).toMatchObject({ x: '100' });
+    expect(step.metadata).toMatchObject({ id: 'intro', class: 'blue' });
+  });
+
+  test('[P11] if no id attribute is supplied for a step, parser should use a sanitized version of the first heading found as id', () => {
+    const step = parse(data.p11[0])[0];
+    expect(step.layout).toMatchObject({ x: '10' });
+    expect(step.metadata).toMatchObject({ id: 'slide-one' });
+  });
+
+  test('[P12] if no id attribute is supplied and the step contains no heading, parser should use the step index as id', () => {
+    const step = parse(data.p12[0])[0];
+    expect(step.layout).toMatchObject({ x: '100' });
+    expect(step.metadata).toMatchObject({ id: 'step-0' });
+  });
+
+  test('[P13] class metadata attribute values should be split by a comma and stored as a string with each class name separated by a space', () => {
+    const step = parse(data.p13[0])[0];
+    expect(step.metadata).toMatchObject({ class: 'slide blue' });
   });
 });
-
-describe('step array item', () => {
-  test('should be an object', () => {
-    expect(typeof simpleTest[0]).toBe('object');
-  });
-
-  test('should contain an attributes object', () => {
-    expect(typeof simpleTest[0].attributes).toBe('object');
-  });
-
-  test('should contain a content string', () => {
-    expect(typeof simpleTest[0].content).toBe('string');
-  });
-});
-
-describe('step attributes object', () => {
-  test('should contain the correct attributes', () => {
-    expect(complexTest[0].attributes.x).toBe('100');
-    expect(complexTest[0].attributes.y).toBe('10');
-    expect(complexTest[1].attributes.x).toBe('200');
-    expect(complexTest[1].attributes.y).toBe('20');
-  });
-});
-
-// describe('step content string', () => {
-//   test('should contain correct html', () => {
-//     expect(simpleTest[0].content).toBe('<h1>Test 1</h1>');
-//     expect(complexTest[0].content).toBe('<h1>H1</h1>');
-//     expect(complexTest[1].content).toBe('<h2>H2</h2>');
-//   });
-// });

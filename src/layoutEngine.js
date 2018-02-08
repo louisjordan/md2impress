@@ -10,7 +10,7 @@ const layouts = loadAssets('layouts');
  * @param {Array} input
  * @param {String} layout
  */
-function applyLayout(steps, layout) {
+function applyLayout(steps, layout = 'manual') {
   if (layout !== 'manual' && isSupported('layouts', layout)) {
     const layoutModule = layouts[layout];
     steps = steps.map(layoutModule.map);

@@ -1,7 +1,7 @@
 const supported = require('./supported');
 const path = require('path');
 
-const isBrowser = typeof window !== 'undefined';
+const isBrowser = typeof window !== 'undefined' && console.log(this);
 
 function isSupported(type, name) {
   if (type && name) return Object.keys(supported).includes(type) && supported[type].includes(name);
@@ -22,18 +22,12 @@ function loadAssets(assetType) {
     } else {
       // in node, read css from file using node fs module
       const fs = require('fs');
-      assetAcc[asset] = fs.readFileSync(
-        path.join(__dirname, `./${assetType}/${asset}.${ext}`),
-        'utf8'
-      );
+      assetAcc[asset] = fs.readFileSync(path.join(__dirname, `./${assetType}/${asset}.${ext}`), 'utf8');
 
       const _defaultCss = fs.readFileSync(path.join(__dirname, `./styles/_defaults.css`), 'utf8');
 
       // replace @import "_defaults.css"; (and other import variations) with _default.css file as the import wont be resolved by node
-      assetAcc[asset] = assetAcc[asset].replace(
-        /^@import (url\()?['"]_defaults.css['"]\(?.+$/m,
-        _defaultCss
-      );
+      assetAcc[asset] = assetAcc[asset].replace(/^@import (url\()?['"]_defaults.css['"]\(?.+$/m, _defaultCss);
     }
 
     return assetAcc;

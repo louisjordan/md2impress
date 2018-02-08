@@ -29,8 +29,7 @@ const layoutAttributes = [
  * @param {string} markdown
  */
 function parse(markdown) {
-  if (typeof markdown !== 'string')
-    throw Error(`Input must be of type string not ${typeof markdown}`);
+  if (typeof markdown !== 'string') throw Error(`Input must be of type string not ${typeof markdown}`);
 
   const steps = splitSteps(markdown).map((content, index) => {
     const stepAttributes = parseStepAttributes(content);
@@ -43,8 +42,8 @@ function parse(markdown) {
 
     // if no id attribute specified, look for a heading. Failing that, use step index
     if (!step.metadata.id) {
-      const heading = content.match(/^#{1,6}\s+(.+)/);
-      step.metadata.id = heading && heading.length ? sanitize(heading[1]) : `step-${index}`;
+      const heading = content.match(/^#{1,6}\s+(.+)/m);
+      step.metadata.id = heading && heading.length ? sanitize(heading[1]).toLowerCase() : `step-${index}`;
     }
 
     // if class attribute is found, replace seperator with a space
@@ -76,7 +75,7 @@ function splitSteps(markdown) {
  * @param {*} content
  */
 function parseStepAttributes(content) {
-  const attrStringMatch = content.match(/^<!--(.+)-->/); 
+  const attrStringMatch = content.match(/^<!--(.+)-->/);
 
   const attrs =
     attrStringMatch && attrStringMatch.length > 1 && attrStringMatch[1].trim().length
@@ -97,15 +96,18 @@ function parseStepAttributes(content) {
 
 // organise attributes into metadata and layout
 function organiseAttributes(attributes) {
-  const organisedAttributes = Object.keys(attributes).reduce((acc, attr) => {
-    if (layoutAttributes.includes(attr)) {
-      acc.layout[attr] = attributes[attr];
-    } else {
-      acc.metadata[attr] = attributes[attr];
-    }
+  const organisedAttributes = Object.keys(attributes).reduce(
+    (acc, attr) => {
+      if (layoutAttributes.includes(attr)) {
+        acc.layout[attr] = attributes[attr];
+      } else {
+        acc.metadata[attr] = attributes[attr];
+      }
 
-    return acc;
-  }, { metadata: {}, layout: {} });
+      return acc;
+    },
+    { metadata: {}, layout: {} }
+  );
 
   return organisedAttributes;
 }
