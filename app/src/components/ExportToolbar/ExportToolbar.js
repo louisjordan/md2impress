@@ -26,13 +26,13 @@ const ExportToolbar = props => {
     });
   };
 
-  /*const exportHTML = () => {
+  const exportHTML = () => {
     saveFile(generateHTML(), `${title}.html`);
   };
 
   const exportMarkdown = () => {
     saveFile(props.markdown, `${title}.md`);
-  };*/
+  };
 
   const generateHTML = () => {
     const { markdown, layout, style } = props;
@@ -42,8 +42,8 @@ const ExportToolbar = props => {
   return (
     <div className="export-toolbar-container">
       <Button onClick={exportZIP}>Save as ZIP</Button>
-      {/*<Button onClick={exportHTML}>Export HTML</Button>
-      <Button onClick={exportMarkdown}>Export Markdown</Button>*/}
+      <Button onClick={exportHTML}>Export HTML</Button>
+      <Button onClick={exportMarkdown}>Export Markdown</Button>
     </div>
   );
 };

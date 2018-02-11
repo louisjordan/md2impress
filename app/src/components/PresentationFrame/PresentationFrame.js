@@ -23,14 +23,31 @@ class PresentationFrame extends Component {
       this.props.update.step(target.id);
     });
 
+    frameDocument.addEventListener('keydown', e => {
+      if (e.keyCode === 80) e.preventDefault(); // stop speaker console in iframe
+    });
+
+    frameDocument.addEventListener('keypress', e => {
+      if (e.keyCode === 80) e.preventDefault(); // stop speaker console in iframe
+    });
+
+    frameDocument.addEventListener('keyup', e => {
+      if (e.keyCode === 80) e.preventDefault(); // stop speaker console in iframe
+    });
+
     frameDocument.close();
   };
 
   componentDidMount = () => {
     this.writeToFrame(this.props);
-    window.addEventListener('keydown', ({ keyCode }) => {
+    window.addEventListener('keydown', e => {
       if (!this.props.inputFocused) {
-        const command = keyCode === 37 ? 'prev' : keyCode === 39 ? 'next' : '';
+        const codes = {
+          37: 'prev',
+          39: 'next'
+        };
+
+        const command = codes[e.keyCode];
 
         if (command) {
           this.refs.frame.contentWindow.impress()[command]();

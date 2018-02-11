@@ -110,7 +110,10 @@ class App extends Component {
                 updateMarkdown={this.updateMarkdown}
                 updateInputFocus={this.updateInputFocus}
               />
-              <InputToolbar {...this.state} update={{ layout: this.updateLayout, style: this.updateStyle }} />
+              <InputToolbar
+                {...this.state}
+                update={{ layout: this.updateLayout, style: this.updateStyle }}
+              />
             </Segment>
           </Grid.Column>
           <Grid.Column>

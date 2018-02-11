@@ -79,7 +79,7 @@ function parseStepAttributes(content) {
 
   const attrs =
     attrStringMatch && attrStringMatch.length > 1 && attrStringMatch[1].trim().length
-      ? attrStringMatch[1].match(/([\w-]+[:=][,-\w]+)/gi)
+      ? attrStringMatch[1].match(/([\w-]+[:=][.,-\w]+)/gi) || []
       : [];
 
   // convert attribute strings into object
