@@ -1,6 +1,6 @@
 {
   "name": "md2impress",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "a Markdown to Impress.js presentation generator",
   "main": "src/index.js",
   "repository": {
@@ -11,7 +11,7 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack",
-    "cli-dev": "nodemon cli/md2impress --input test/data/cli_input.md --output _temp/cli_output.html -s impress-demo",
+    "cli-dev": "nodemon cli/md2impress --input test/data/cli_input.md --output _temp -s impress-demo",
     "lint": "prettier --single-quote --print-width 120 -l --write \"{src,test}/**/*.js\"",
     "pre-commit": "npm run build && npm run lint",
     "test": "jest"

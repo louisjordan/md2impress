@@ -10,7 +10,7 @@ import PresentationFrame from '../PresentationFrame/PresentationFrame';
 
 import './App.css';
 
-const defaultMarkdown = `<!-- x:100 y:100 -->
+const defaultMarkdown = `<!-- x:100 y:100 class=slide,blue -->
 
 # Example presentation
 
@@ -22,7 +22,7 @@ const defaultMarkdown = `<!-- x:100 y:100 -->
 Use markdown comments to specify slide layout and metadata.
 
 \`\`\`
-<!-- x:300 y:250 rotate=180 scale:3 class=step,blue -->
+<!-- x:300 y:250 rotate=180 scale:3 class=slide,blue -->
 \`\`\`
 
 ======

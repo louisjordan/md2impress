@@ -1,5 +1,3 @@
-import { log } from 'util';
-
 const supported = require('./supported');
 const path = require('path');
 

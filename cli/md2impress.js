@@ -21,15 +21,15 @@ const { version } = require('../package');
 program
   .version(version)
   .usage('-i input.md -o output.html [options]')
-  .option('-i, --input <file>', 'Markdown input file path')
-  .option('-o, --output <file>', 'HTML output destination')
+  .option('-i, --input <file|dir>', 'Markdown input file path')
+  .option('-o, --output <dir>', 'HTML output directory')
   .option('-l, --layout [layout]', 'Presentation layout')
   .option('-s, --style [style]', 'Presentation style')
   .option('-t, --title [title]', 'Presentation title')
   .parse(process.argv);
 
-if (!program.input || !program.output) {
-  console.log('Error: An input and output path must be provided! *');
+if (!program.input) {
+  console.log('Error: An input path must be provided! *');
   program.help();
   process.exit();
 }
@@ -37,34 +37,54 @@ if (!program.input || !program.output) {
 /* Read input path -> generate html with md2impress -> write to output path */
 const basePath = process.cwd();
 const inputPath = path.resolve(basePath, program.input);
-const ouputPath = path.resolve(basePath, program.output);
-
+const outputPath = program.output ? path.resolve(basePath, program.output) : helpers.getLocationFromPath(inputPath);
 const layout = program.layout;
 const style = program.style;
-const title = program.title || helpers.prettifyString(helpers.getFilenameFromPath(program.input));
 
-// TODO: Check input/output paths and files exist
-// TODO: Input file type is correct
+const outputIsDir = fs.lstatSync(outputPath).isDirectory();
+const inputIsDir = fs.lstatSync(inputPath).isDirectory();
 
-// read input file
-fs.readFile(inputPath, 'utf8', (err, input) => {
-  if (err) throw err;
+if (!outputIsDir) {
+  console.log('Error: Output path must be a valid directory *');
+  program.help();
+  process.exit();
+}
 
-  try {
-    // generate html
-    const html = md2impress(input, { layout, style, title });
+const inputFilePaths = inputIsDir
+  ? fs
+      .readdirSync(inputPath)
+      .map(file => path.resolve(basePath, inputPath, file))
+      .filter(file => file.match(/\.md$/))
+  : [inputPath];
 
-    // write to output path
-    fs.writeFile(ouputPath, html, err => {
-      if (err) throw err;
-      console.log(`Save successful!
-Base path: ${basePath}
-      [MD] /${program.input}
-    [HTML] /${program.output}`);
+console.log('\n*** welcome to md2impress ***\n');
+console.log(`Generating ${inputFilePaths.length} presentation${inputFilePaths.length > 1 ? 's' : ''}...`);
+
+// generate presentations
+inputFilePaths.forEach((inPath, index) => {
+  const filename = helpers.getFilenameFromPath(inPath);
+  const outPath = path.resolve(outputPath, filename + '.html');
+
+  const title =
+    program.title && inputIsDir ? `${program.title}_${index}` : helpers.formatString(program.title || filename);
+
+  // read input file
+  fs.readFile(inPath, 'utf8', (err, input) => {
+    if (err) throw err;
+
+    try {
+      // generate html
+      const html = md2impress(input, { layout, style, title });
+
+      // write to output path
+      fs.writeFile(outPath, html, err => {
+        if (err) console.error(err);
+        console.log(`\n[\u2713] [${title}]`);
+        console.log(`    [MD] ${inPath}\n  [HTML] ${outPath}`);
+      });
+    } catch (error) {
+      console.error(error);
       process.exit();
-    });
-  } catch (error) {
-    console.error(error);
-    process.exit();
-  }
+    }
+  });
 });
