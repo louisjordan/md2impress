@@ -3,6 +3,7 @@ import { Grid, Segment, Form, Input } from 'semantic-ui-react';
 
 import '../../assets/md2impress.min.js'; // md2impress
 
+import InfoBubble from '../InfoBubble/InfoBubble';
 import MarkdownTextArea from '../MarkdownTextArea/MarkdownTextArea';
 import InputToolbar from '../InputToolbar/InputToolbar';
 import ExportToolbar from '../ExportToolbar/ExportToolbar';
@@ -89,6 +90,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <InfoBubble />
         <Grid columns={2} stackable className="app-container">
           <Grid.Column>
             <Segment>
@@ -110,10 +112,7 @@ class App extends Component {
                 updateMarkdown={this.updateMarkdown}
                 updateInputFocus={this.updateInputFocus}
               />
-              <InputToolbar
-                {...this.state}
-                update={{ layout: this.updateLayout, style: this.updateStyle }}
-              />
+              <InputToolbar {...this.state} update={{ layout: this.updateLayout, style: this.updateStyle }} />
             </Segment>
           </Grid.Column>
           <Grid.Column>

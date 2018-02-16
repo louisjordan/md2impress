@@ -136,7 +136,7 @@ th {
 
 .step {
   /* position: relative; */
-  min-width: 960px;
+  min-width: 900px;
   min-height: 500px;
   padding: 40px;
   margin: 20px auto;
@@ -199,8 +199,18 @@ ul {
   list-style-type: initial;
 }
 
+li ul {
+  margin: 16px 40px;
+}
+
+.step:nth-child(1) {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+}
+
 .step:nth-child(1) h1 {
-  /* margin-top: 150px; */
+  margin: 0;
 }
 
 /* First p after a h1 only on the first step */

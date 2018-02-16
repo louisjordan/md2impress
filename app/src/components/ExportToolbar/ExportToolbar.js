@@ -42,8 +42,8 @@ const ExportToolbar = props => {
   return (
     <div className="export-toolbar-container">
       <Button onClick={exportZIP}>Save as ZIP</Button>
-      <Button onClick={exportHTML}>Export HTML</Button>
-      <Button onClick={exportMarkdown}>Export Markdown</Button>
+      <Button onClick={exportHTML}>Save HTML</Button>
+      <Button onClick={exportMarkdown}>Save Markdown</Button>
     </div>
   );
 };

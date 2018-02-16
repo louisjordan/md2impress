@@ -1,0 +1,66 @@
+.info-bubble {
+  width: 100%;
+  height: 60px;
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.info-bubble .info {
+  background: #f1f1f1;
+  height: 30px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-content: center;
+
+  transform: translateY(-25px);
+  transition: 0.3s ease;
+}
+
+.info-bubble.hovered .info {
+  transform: translateY(0px);
+}
+
+.info-bubble a {
+  display: inline-block;
+  height: 100%;
+  padding-top: 5px;
+}
+
+.info-bubble .info > div {
+  width: 300px;
+}
+
+.info-bubble .info .left {
+  margin-right: 50px;
+  text-align: right;
+}
+
+.info-bubble .info .right {
+  margin-left: 50px;
+}
+
+.info-bubble .right a {
+  margin-right: 16px;
+}
+
+.info-bubble .left a {
+  margin-left: 16px;
+}
+
+.info-bubble .bubble {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: -63px auto 0 auto;
+  background-image: url('../../assets/logo.png');
+  background-repeat: no-repeat;
+  background-size: 65%;
+  background-position-x: center;
+  background-position-y: 25px;
+  background-color: #f1f1f1;
+  position: relative;
+  z-index: 101;
+}
