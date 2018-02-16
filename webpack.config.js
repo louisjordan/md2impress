@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 
+const env = process.env.NODE_ENV || 'development';
+
 const config = {
   devtool: 'source-map',
   target: 'web',
@@ -25,7 +27,7 @@ const config = {
   plugins: [
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"'
+      'process.env.NODE_ENV': `"${env}"`
     }),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
@@ -42,7 +44,21 @@ const app = Object.assign({}, config, {
   output: {
     path: path.resolve(__dirname, 'app/src/assets'),
     filename: 'md2impress.min.js'
-  }
+  },
+  plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"'
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false,
+        drop_console: false
+      }
+    }),
+    new webpack.BannerPlugin({ banner: '// eslint-disable-next-line', raw: true })
+  ]
 });
 
 const md2impress = Object.assign({}, config, {
