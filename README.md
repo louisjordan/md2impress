@@ -18,10 +18,28 @@ md2impress works in the browser _and_ in Node _and_ has a CLI interface
 
 ```bash
 $ npm install --global md2impress
-$ md2impress -i input/path -o output/path -l [layout] -s [style]
+$ md2impress --input <file|dir> --output <dir> [options]
+
+Options:
+
+    -v, --version          output the version number
+    -i, --input [input]    Markdown input directory or file path (default: current directory)
+    -o, --output [output]  HTML output directory (default: input directory)
+    -l, --layout [layout]  Presentation layout (default: 'manual')
+    -s, --style [style]    Presentation style (default: 'basic')
+    -t, --title [title]    Presentation title (default: input filename)
+    -h, --help             output usage information
+    
+e.g:
+    
+$ md2impress -i ~/Documents/presentations -l spiral -s deep-purple
 ```
 
 *Node*
+
+```bash
+$ npm install --save md2impress
+```
 
 ```javascript
 const md2impress = require('md2impress');
@@ -34,8 +52,11 @@ Welcome to my *example* slide
 This is the second slide
 `;
 
-const html = md2impress(markdown, { layout: 'horizontal', style: 'default' });
+const html = md2impress(markdown, { layout: 'horizontal', style: 'basic', title: 'My Presentation' });
 ```
+
+**NOTE: if using md2impress in a bundled application, it is recommended to build the file separately by cloning the [repository](https://github.com/louisjordan/md2impress) and running `npm run build` then importing it using a `script` tag as shown below.**
+
 
 *Browser*
 
@@ -54,7 +75,7 @@ Welcome to my *example* slide
 This is the second slide
 `;
 
-      const html = window.md2impress(markdown, { layout: 'horizontal', style: 'default' });
+      const html = window.md2impress(markdown, { layout: 'horizontal', style: 'basic', title: 'My Presentation' });
     </script>
   </body>
 </html>
@@ -102,6 +123,7 @@ Supported layouts:
 | manual      | Reads from each step's attributes comment          |
 | horizontal  | Display each step one after the other horizontally |
 | vertical    | Display each step one after the other vertically   |
+| spiral      | Display steps as an [Archimedean Spiral](https://en.wikipedia.org/wiki/Archimedean_spiral) |
 
 ### Styles
 
@@ -123,13 +145,16 @@ const html = md2impress(markdown, { style: 'minimalist' });
 
 Supported styles:
 
-| Style Name | Description                               |
-| ---------- | ----------------------------------------- |
-| basic      | Simple design, nothing too fancy          |
-| minimalist | Clean, simple, monochromatic style [TODO] |
+| Name   | Description                               |
+| ------------ | ----------------------------------------- |
+| basic        | Simple design, nothing too fancy          |
+| impress-demo | Impress.js demo presentation style        |
+| simple-blue  | |
+| deep-purple  | |
+| retro        | |
 
 # Custom layouts and style
-To create a custom layout or style style
+To create a custom layout or style, first clone this repository then:
 
 _Style_
 
@@ -139,7 +164,7 @@ _Layout_
 
 - add a JS file to `./src/layouts/` that exports a `map` iteration function (NOTE: see examples in `./src/layouts/`)
 
-_..._
+_then..._
 
 - add the layout/style name to `./src/supported.json` (NOTE: name _must_ be the same as filename e.g. `./src/style/basic.css = 'basic'`)
 - run `npm run build` 
@@ -150,5 +175,5 @@ It is recommended to import the `_defaults.css` file to your custom stylesheets 
 ```css
 @import '_defaults.css';
 
-h1 { ...
+.step { ... }
 ```
