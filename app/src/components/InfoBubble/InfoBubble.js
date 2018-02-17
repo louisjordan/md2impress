@@ -16,7 +16,9 @@ class InfoBubble extends Component {
       >
         <div className="info">
           <div className="left">
-            <a href="https://github.com/louisjordan/md2impress/blob/master/README.md">About md2impress</a>
+            <a href="https://github.com/louisjordan/md2impress/blob/master/README.md">
+              About md2impress
+            </a>
           </div>
           <div className="right">
             <a href="https://github.com/louisjordan/md2impress">GitHub</a>

@@ -1,6 +1,6 @@
 {
   "name": "md2impress",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "a Markdown to Impress.js presentation generator",
   "main": "src/index.js",
   "repository": {
@@ -28,7 +28,6 @@
   },
   "dependencies": {
     "commander": "^2.12.2",
-    "global": "^4.3.2",
     "marked": "^0.3.6"
   },
   "bugs": {

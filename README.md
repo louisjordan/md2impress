@@ -5,8 +5,8 @@
 ## Installation
 
 ```bash
-$ npm install md2impress 				# via npm
-$ yarn add md2impress					# yarn works too!
+$ npm install --save md2impress 				# via npm
+$ yarn add md2impress --dev  					# yarn works too!
 $ git clone git@github.com:louisjordan/md2impress.git 	# via github
 ```
 
@@ -14,7 +14,7 @@ $ git clone git@github.com:louisjordan/md2impress.git 	# via github
 
 md2impress works in the browser _and_ in Node _and_ has a CLI interface
 
-*CLI*
+_CLI_
 
 ```bash
 $ npm install --global md2impress
@@ -29,13 +29,13 @@ Options:
     -s, --style [style]    Presentation style (default: 'basic')
     -t, --title [title]    Presentation title (default: input filename)
     -h, --help             output usage information
-    
+
 e.g:
-    
+
 $ md2impress -i ~/Documents/presentations -l spiral -s deep-purple
 ```
 
-*Node*
+_Node_
 
 ```bash
 $ npm install --save md2impress
@@ -55,10 +55,11 @@ This is the second slide
 const html = md2impress(markdown, { layout: 'horizontal', style: 'basic', title: 'My Presentation' });
 ```
 
-**NOTE: if using md2impress in a bundled application, it is recommended to build the file separately by cloning the [repository](https://github.com/louisjordan/md2impress) and running `npm run build` then importing it using a `script` tag as shown below.**
+**NOTE: if using md2impress in a bundled application, it is recommended to build the file separately by cloning the
+[repository](https://github.com/louisjordan/md2impress) and running `npm run build` then importing it using a `script`
+tag as shown below.**
 
-
-*Browser*
+_Browser_
 
 ```html
 <!doctype html>
@@ -85,11 +86,10 @@ This is the second slide
 
 ### Layouts
 
-Layouts apply step coordinate attributes including x & y positions, rotation and
-scaling allowing for consistent presentation transitions.
+Layouts apply step coordinate attributes including x & y positions, rotation and scaling allowing for consistent
+presentation transitions.
 
-In the CLI you can specify the layout using the `-l [layout]` (default is
-`manual`) flag e.g:
+In the CLI you can specify the layout using the `-l [layout]` (default is `manual`) flag e.g:
 
 ```bash
 $ md2impress -i input/path -o output/path -l horizontal
@@ -101,8 +101,8 @@ Via the API you specify the layout in the options object e.g:
 const html = md2impress(markdown, { layout: 'horizontal' });
 ```
 
-Alternatively, you can specify your own attributes using the 'manual' layout
-mode. md2impress will read attributes for each slide like this:
+Alternatively, you can specify your own attributes using the 'manual' layout mode. md2impress will read attributes for
+each slide like this:
 
 ```markdown
 <!-- x:100 y:200 rotation:90 -->
@@ -118,20 +118,18 @@ mode. md2impress will read attributes for each slide like this:
 
 Supported layouts:
 
-| Layout Name | Description                                        |
-| ----------- | -------------------------------------------------- |
-| manual      | Reads from each step's attributes comment          |
-| horizontal  | Display each step one after the other horizontally |
-| vertical    | Display each step one after the other vertically   |
+| Layout Name | Description                                                                                |
+| ----------- | ------------------------------------------------------------------------------------------ |
+| manual      | Reads from each step's attributes comment                                                  |
+| horizontal  | Display each step one after the other horizontally                                         |
+| vertical    | Display each step one after the other vertically                                           |
 | spiral      | Display steps as an [Archimedean Spiral](https://en.wikipedia.org/wiki/Archimedean_spiral) |
 
 ### Styles
 
-Styles apply CSS to your presentations allowing for consistent presentation
-designs with zero effort.
+Styles apply CSS to your presentations allowing for consistent presentation designs with zero effort.
 
-In the CLI you can specify the style using the `-s [style]` flag (default is
-`basic`) e.g:
+In the CLI you can specify the style using the `-s [style]` flag (default is `basic`) e.g:
 
 ```bash
 $ md2impress -i input/path -o output/path -s minimalist
@@ -145,35 +143,40 @@ const html = md2impress(markdown, { style: 'minimalist' });
 
 Supported styles:
 
-| Name   | Description                               |
-| ------------ | ----------------------------------------- |
-| basic        | Simple design, nothing too fancy          |
-| impress-demo | Impress.js demo presentation style        |
-| simple-blue  | |
-| deep-purple  | |
-| retro        | |
+| Name         | Description                        |
+| ------------ | ---------------------------------- |
+| basic        | Simple design, nothing too fancy   |
+| impress-demo | Impress.js demo presentation style |
+| simple-blue  |                                    |
+| deep-purple  |                                    |
+| retro        |                                    |
 
 # Custom layouts and style
+
 To create a custom layout or style, first clone this repository then:
 
 _Style_
 
-- add the CSS file to `./src/styles/`
+* add the CSS file to `./src/styles/`
 
 _Layout_
 
-- add a JS file to `./src/layouts/` that exports a `map` iteration function (NOTE: see examples in `./src/layouts/`)
+* add a JS file to `./src/layouts/` that exports a `map` iteration function (NOTE: see examples in `./src/layouts/`)
 
 _then..._
 
-- add the layout/style name to `./src/supported.json` (NOTE: name _must_ be the same as filename e.g. `./src/style/basic.css = 'basic'`)
-- run `npm run build` 
+* add the layout/style name to `./src/supported.json` (NOTE: name _must_ be the same as filename e.g.
+  `./src/style/basic.css = 'basic'`)
+* run `npm run build`
 
 ### Custom Styles
+
 It is recommended to import the `_defaults.css` file to your custom stylesheets as a base to work from:
 
 ```css
 @import '_defaults.css';
 
-.step { ... }
+.step {
+  ...;
+}
 ```
