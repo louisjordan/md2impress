@@ -31,7 +31,6 @@ function generate(steps, style, title = 'Presentation') {
   // merge html with template
   const html = templates.html
     .replace('{{ title }}', title)
-    .replace('{{ impressjs }}', templates.impressjs)
     .replace('{{ css }}', styles[style])
     .replace('{{ steps }}', stepsHtml);
 

@@ -20,7 +20,10 @@ const spiral = {
     // depth
     const z = -defaults.perspective * index;
 
-    step.layout = { x, y, z, rotate };
+    step = {
+      ...step,
+      layout: { x, y, z, rotate }
+    };
 
     return step;
   }
