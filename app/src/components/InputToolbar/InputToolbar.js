@@ -28,22 +28,8 @@ const InputToolbar = props => {
 
   return (
     <div className="toolbar-container">
-      <Dropdown
-        selection
-        labeled
-        upward
-        value={props.layout}
-        options={layoutOptions}
-        onChange={handleLayoutChange}
-      />
-      <Dropdown
-        selection
-        labeled
-        upward
-        value={props.style}
-        options={styleOptions}
-        onChange={handleStyleChange}
-      />
+      <Dropdown selection labeled upward value={props.layout} options={layoutOptions} onChange={handleLayoutChange} />
+      <Dropdown selection labeled upward value={props.style} options={styleOptions} onChange={handleStyleChange} />
       <HelpDialog />
     </div>
   );

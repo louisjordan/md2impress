@@ -17,7 +17,7 @@
     "semantic-ui-react": "^0.77.0"
   },
   "scripts": {
-    "lint": "prettier --single-quote --print-width 100 -l --write \"{src,test}/**/*.js\"",
+    "lint": "prettier --single-quote --print-width 120 -l --write \"{src,test}/**/*.js\"",
     "predeploy": "npm run lint && npm run build",
     "deploy": "npm run predeploy && gh-pages -d build",
     "start": "react-scripts start",

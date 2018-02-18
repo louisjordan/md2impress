@@ -65,7 +65,6 @@ _Browser_
 <!doctype html>
 <html>
   <body>
-    <div id="presentation">
     <script src="path/to/md2impress.min.js"></script>
     <script>
       const markdown = `
