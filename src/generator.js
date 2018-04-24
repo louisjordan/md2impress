@@ -18,8 +18,8 @@ function generate(steps, style, title = 'Presentation') {
     const contentHtml = marked(step.content).replace(/<!--.+-->\n/, ''); // convert to html and remove comments
 
     const stepHtml = templates.step
-      .replace('{{ id }}', step.metadata.id)
-      .replace('{{ class }}', step.metadata.class ? step.metadata.class : '')
+      .replace('{{ id }}', step.metadata && step.metadata.id ? step.metadata.id : '')
+      .replace('{{ class }}', step.metadata && step.metadata.class ? step.metadata.class : '')
       .replace('{{ attributes }}', attrHtml)
       .replace('{{ content }}', contentHtml);
 
