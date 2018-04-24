@@ -1,7 +1,7 @@
 const supported = require('./supported');
 const path = require('path');
 
-const isBrowser = typeof window !== 'undefined';
+const isBrowser = typeof window !== 'undefined' && typeof process === 'undefined';
 
 function isSupported(type, name) {
   if (type && name) return Object.keys(supported).includes(type) && supported[type].includes(name);
