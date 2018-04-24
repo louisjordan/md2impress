@@ -3,6 +3,8 @@ import { Form, TextArea } from 'semantic-ui-react';
 
 import './MarkdownTextArea.css';
 
+let debounceTimer;
+
 class MarkdownTextArea extends Component {
   gotoStep = target => {
     const position = target.selectionStart;
@@ -23,7 +25,17 @@ class MarkdownTextArea extends Component {
   };
 
   handleKeyUp = ({ target }) => {
-    this.props.updateMarkdown(target.value);
+    const update = () => {
+      this.props.updateMarkdown(target.value);
+    };
+
+    if (this.props.delay > 100) {
+      window.clearTimeout(debounceTimer);
+      debounceTimer = window.setTimeout(update, 500);
+    } else {
+      update();
+    }
+
     this.gotoStep(target);
   };
 

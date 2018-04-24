@@ -8,6 +8,10 @@
   float: right;
 }
 
+.left {
+  float: left !important;
+}
+
 @media only screen and (max-width: 767px) {
   .export-toolbar-container .button {
     padding-left: 0.5em;

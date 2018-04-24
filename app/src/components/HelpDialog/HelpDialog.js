@@ -38,14 +38,18 @@ const HelpDialog = props => {
       </Popup.Content>
       <Popup.Header>Layout Reference</Popup.Header>
       <Popup.Content>
-        When manually laying out presentations, at the start of each slide you can specify your layout parameters using
-        a comment.<br />
-        <br />For example:<br />
-        <code>{'<!-- x:100 y:100 rotate:90 -->'}</code>
-        <br />
-        <br />Available layout parameters:
-        <br />
-        <code>x y rotate rotate-x rotate-y rotate-z rotate-order scale</code>
+        <p>
+          When manually laying out presentations, at the start of each slide you can specify your layout parameters
+          using a comment.<br />
+          <br />For example:<br />
+          <code>{'<!-- x:100 y:100 rotate:90 -->'}</code>
+          <br />
+          <br />Available layout parameters:
+          <br />
+          <code>x y rotate rotate-x rotate-y rotate-z rotate-order scale</code>
+          <br />
+          <br />
+        </p>
       </Popup.Content>
       <Popup.Header>Styling</Popup.Header>
       <Popup.Content>

@@ -15,7 +15,7 @@ const config = {
         include: [path.resolve(__dirname, 'src')],
         loader: 'babel-loader',
         options: {
-          presets: ['es2015']
+          presets: ['es2015', 'stage-2']
         }
       },
       {

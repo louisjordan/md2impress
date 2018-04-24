@@ -15,7 +15,8 @@ const defaultMarkdown = `<!-- x:100 y:100 class=slide,blue -->
 
 # Example presentation
 
-======
+=============================
+
 <!-- x:2000 y:2000 scale:2 rotate-y:-90 -->
 
 ## Layout and Metadata Attributes
@@ -26,7 +27,8 @@ Use markdown comments to specify slide layout and metadata.
 <!-- x:300 y:250 rotate=180 scale:3 class=slide,blue -->
 \`\`\`
 
-======
+=============================
+
 <!-- x:-1500 y:1000 scale:1  rotate-x:80 -->
 
 ## Leverage Markdown
@@ -35,7 +37,19 @@ Use markdown comments to specify slide layout and metadata.
 - *italic* = \`*italic*\` or \`_italic_\`
 - [Link](http://example.com) = \`[Link](http://example.com)\`
 
-See the [ ? ] help dialog for more!
+##### Tables
+
+\`\`\`
+|Name|Age|
+|----|---|
+|Bob|101|
+\`\`\`
+
+|Name|Age|
+|----|---|
+|Bob|101|
+
+**Open the help dialog [ ? ]  for more!**
 `;
 
 class App extends Component {
@@ -45,7 +59,8 @@ class App extends Component {
     style: 'basic',
     markdown: '',
     step: '',
-    inputFocused: false
+    inputFocused: false,
+    delay: 0 // the time taken to generate a presentation
   };
 
   updateLayout = layout => {
@@ -71,6 +86,10 @@ class App extends Component {
   updateStep = step => {
     this.setState({ step });
     window.localStorage.setItem('step', step);
+  };
+
+  updateDelay = delay => {
+    this.setState({ delay });
   };
 
   updateInputFocus = inputFocused => {
@@ -107,6 +126,7 @@ class App extends Component {
                 />
               </Form>
               <MarkdownTextArea
+                {...this.state}
                 markdown={this.state.markdown}
                 updateStep={this.updateStep}
                 updateMarkdown={this.updateMarkdown}
@@ -117,7 +137,7 @@ class App extends Component {
           </Grid.Column>
           <Grid.Column>
             <Segment>
-              <PresentationFrame {...this.state} update={{ step: this.updateStep }} />
+              <PresentationFrame {...this.state} update={{ step: this.updateStep, delay: this.updateDelay }} />
               <ExportToolbar {...this.state} />
             </Segment>
           </Grid.Column>

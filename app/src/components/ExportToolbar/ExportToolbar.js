@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'semantic-ui-react';
+import { Button, Icon } from 'semantic-ui-react';
 
 import JSZip from 'jszip';
 import saveFile from 'save-file';
@@ -39,8 +39,21 @@ const ExportToolbar = props => {
     return window.md2impress(markdown, { title, layout, style });
   };
 
+  const navigate = direction => {
+    document
+      .querySelector('.presentation-frame')
+      .contentWindow.impress()
+      [direction]();
+  };
+
   return (
     <div className="export-toolbar-container">
+      <Button onClick={() => navigate('prev')} className="left">
+        <Icon name="arrow left" />
+      </Button>
+      <Button onClick={() => navigate('next')} className="left">
+        <Icon name="arrow right" />
+      </Button>
       <Button onClick={exportZIP}>Save as ZIP</Button>
       <Button onClick={exportHTML}>Save HTML</Button>
       <Button onClick={exportMarkdown}>Save Markdown</Button>

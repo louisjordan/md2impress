@@ -34,7 +34,7 @@
   }
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
   .App {
     padding: 20px 10px 0 10px;
   }

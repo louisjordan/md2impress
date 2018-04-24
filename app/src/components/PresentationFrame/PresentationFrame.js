@@ -4,7 +4,11 @@ import './PresentationFrame.css';
 
 class PresentationFrame extends Component {
   writeToFrame = props => {
-    let { markdown, step, title, layout, style } = props;
+    let { markdown, step, title, layout, style, update } = props,
+      startTime,
+      endTime;
+
+    startTime = window.performance.now();
 
     let html = window.md2impress(markdown, { title, layout, style });
 
@@ -13,7 +17,8 @@ class PresentationFrame extends Component {
       html = html.replace('impress().init();', `impress().init(); impress().goto(${step});`);
     }
 
-    const frameDocument = this.refs.frame.contentWindow.document;
+    const frameWindow = this.refs.frame.contentWindow;
+    const frameDocument = frameWindow.document;
 
     frameDocument.open();
     frameDocument.write(html);
@@ -27,12 +32,9 @@ class PresentationFrame extends Component {
       if (e.keyCode === 80) e.preventDefault(); // stop speaker console in iframe
     });
 
-    frameDocument.addEventListener('keypress', e => {
-      if (e.keyCode === 80) e.preventDefault(); // stop speaker console in iframe
-    });
-
-    frameDocument.addEventListener('keyup', e => {
-      if (e.keyCode === 80) e.preventDefault(); // stop speaker console in iframe
+    frameWindow.addEventListener('load', e => {
+      endTime = window.performance.now();
+      update.delay(endTime - startTime);
     });
 
     frameDocument.close();
