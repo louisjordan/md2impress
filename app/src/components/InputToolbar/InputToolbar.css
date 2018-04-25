@@ -4,13 +4,32 @@
   flex-grow: 1;
 }
 
+.toolbar-container .field {
+  width: 130px;
+  display: inline-block;
+  position: relative;
+  margin-right: 72px !important;
+}
+
+.toolbar-container .label {
+  top: 0.5em !important;
+  left: 124px !important;
+  pointer-events: none;
+}
+
+.toolbar-container .label.style {
+  left: 134px !important;
+}
+
 .toolbar-container .dropdown {
-  margin-right: 8px;
+  max-width: 80px;
+  width: 100%;
+  margin-right: 24px;
 }
 
 @media only screen and (max-width: 767px) {
   .toolbar-container .dropdown {
     min-width: initial !important;
-    width: 110px;
+    width: 100px;
   }
 }

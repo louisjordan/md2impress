@@ -44,9 +44,10 @@ class MarkdownTextArea extends Component {
   };
 
   render() {
-    const placeholder = `# My presentation
+    const placeholder = `# First Slide
 
 ======
+
 ## This is the next slide`;
 
     return (

@@ -12,6 +12,10 @@
   float: left !important;
 }
 
+.export-toolbar-container .button {
+  height: 36px;
+}
+
 @media only screen and (max-width: 767px) {
   .export-toolbar-container .button {
     padding-left: 0.5em;

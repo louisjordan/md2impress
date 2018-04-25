@@ -1,19 +1,19 @@
 import React from 'react';
-import { Dropdown } from 'semantic-ui-react';
+import { Dropdown, Form, Label } from 'semantic-ui-react';
 import HelpDialog from '../HelpDialog/HelpDialog';
 
 import './InputToolbar.css';
 
+const layouts = ['manual', ...window.supported.layouts];
+const layoutOptions = layouts.map(layout => ({
+  text: layout,
+  value: layout
+}));
+
+const styles = window.supported.styles;
+const styleOptions = styles.map(layout => ({ text: layout, value: layout }));
+
 const InputToolbar = props => {
-  const layouts = ['manual', 'horizontal', 'vertical', 'spiral'];
-  const layoutOptions = layouts.map(layout => ({
-    text: layout,
-    value: layout
-  }));
-
-  const styles = window.supported.styles;
-  const styleOptions = styles.map(layout => ({ text: layout, value: layout }));
-
   const handleStyleChange = ({ target }) => {
     if (!target.classList.contains('dropdown')) {
       props.update.style(target.innerText);
@@ -28,9 +28,26 @@ const InputToolbar = props => {
 
   return (
     <div className="toolbar-container">
-      <Dropdown selection labeled upward value={props.layout} options={layoutOptions} onChange={handleLayoutChange} />
-      <Dropdown selection labeled upward value={props.style} options={styleOptions} onChange={handleStyleChange} />
-      <HelpDialog />
+      <Form>
+        <Form.Field>
+          <Dropdown
+            selection
+            labeled
+            upward
+            value={props.layout}
+            options={layoutOptions}
+            onChange={handleLayoutChange}
+          />
+          <Label floating>Layout</Label>
+        </Form.Field>
+        <Form.Field>
+          <Dropdown selection labeled upward value={props.style} options={styleOptions} onChange={handleStyleChange} />
+          <Label floating className="style">
+            Style
+          </Label>
+        </Form.Field>
+        <HelpDialog />
+      </Form>
     </div>
   );
 };

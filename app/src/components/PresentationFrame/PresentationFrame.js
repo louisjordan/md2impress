@@ -8,6 +8,8 @@ class PresentationFrame extends Component {
       startTime,
       endTime;
 
+    if (!markdown) return;
+
     startTime = window.performance.now();
 
     let html = window.md2impress(markdown, { title, layout, style });
@@ -77,7 +79,7 @@ class PresentationFrame extends Component {
   };
 
   render() {
-    return <iframe ref="frame" className="presentation-frame" title="output-frame" />;
+    return <iframe ref="frame" className="presentation-frame" title="output-frame" onLoad={this.writeToFrame} />;
   }
 }
 
