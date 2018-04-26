@@ -1,13 +1,31 @@
-# md2impress [![Build Status](https://travis-ci.com/louisjordan/md2impress.svg?token=tF3yA5qbRRzsfTPZf6ue&branch=master)](https://travis-ci.com/louisjordan/md2impress)
+# md2impress [![Build Status](https://travis-ci.org/louisjordan/md2impress.svg?branch=master)](https://travis-ci.org/louisjordan/md2impress)
 
 :pencil: generate web presentations from markdown!
 
+[Web App Demo](https://louisjordan.github.io/md2impress)
+
 ## Installation
+md2impress requires **Node v8.3.0+** and **npm**. Download Node + npm [here](https://nodejs.org/en/).
+
+Run these commands to install the package and its dependencies
 
 ```bash
-$ npm install --save md2impress 				# via npm
-$ yarn add md2impress --dev  					# yarn works too!
-$ git clone git@github.com:louisjordan/md2impress.git 	# via github
+$ cd path/to/directory
+$ npm install --save md2impress
+```
+
+or clone this repo using this command `
+git clone git@github.com:louisjordan/md2impress.git`
+
+#### Developers
+
+To run the [web application](https://louisjordan.github.io/md2impress) locally, first clone the repository then navigate to the app directory. Next, install the dependencies and finally run `npm start`.
+
+```bash
+$ git clone git@github.com:louisjordan/md2impress.git
+$ cd app
+$ npm install
+$ npm start
 ```
 
 ## Usage
