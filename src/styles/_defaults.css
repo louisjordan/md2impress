@@ -222,6 +222,7 @@ code {
   font-family: 'Lucida Console', Monaco, monospace;
   margin: 16px 24px;
   font-size: 0.8em;
+  display: inline-block;
 }
 
 img {
