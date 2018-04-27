@@ -6,4 +6,5 @@
 .markdown-input {
   height: 100%;
   font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-size: 16px !important;
 }
