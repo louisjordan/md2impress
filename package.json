@@ -30,7 +30,7 @@
   "dependencies": {
     "commander": "^2.12.2",
     "jszip": "^3.1.5",
-    "marked": "^0.3.6"
+    "marked": "^4.0.10"
   },
   "bugs": {
     "url": "https://github.com/louisjordan/md2impress/issues"
